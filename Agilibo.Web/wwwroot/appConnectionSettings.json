@@ -1,0 +1,29 @@
+﻿{
+  //For DevWeb
+  "ConnectionString": {
+
+    "apiUrl": "http://89.145.160.220:9001/api",
+    "pockerApiUrl": "http://89.145.160.220:9001/playpocker",
+    "feedsApiUrl": "http://89.145.160.220:9001/agilibofeeds"
+  }
+  //"ConnectionString": {
+
+  //  "apiUrl": "http://103.217.111.47:9001/api",
+  //  "pockerApiUrl": "http://103.217.111.47:9001/playpocker",
+  //  "feedsApiUrl": "http://103.217.111.47:9001/agilibofeeds"
+  //}
+  //PreProd(Staging)
+  //"ConnectionString": {
+
+  //  "apiUrl": "http://89.145.160.220:8008/api",
+  //  "pockerApiUrl": "http://89.145.160.220:8008/playpocker",
+  //  "feedsApiUrl": "http://89.145.160.220:8008/agilibofeeds"
+  //}
+  //Development
+  //"ConnectionString": {
+
+  //  "apiUrl": "http://localhost:11338/api",
+  //  "pockerApiUrl": "http://localhost:11338/playpocker",
+  //  "feedsApiUrl": "http://localhost:11338/agilibofeeds"
+  //}
+}

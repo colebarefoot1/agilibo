@@ -1,0 +1,79 @@
+﻿<br /><br /><br /><br /><br />
+<div class="row">
+  
+    <form class="Unitform" name="form" autocomplete="off" (ngSubmit)="f.form.valid && submitCompanyUnit()" #f="ngForm" novalidate>
+        <div class="unitDiv">
+            <alert></alert>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2> Add Unit </h2></div>
+                <div class="panel-body">
+                    <div class="">
+                        <p>Woops! It seems like you are not assinged with any units yet.</p><p>
+                            If you know your unit,
+                            please click "SELECT" button below and go on to select the unit of
+                            your company OR if click "CREATE" button to create a new unit.
+                        </p>  <br /><br />
+                        <button id="createBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#createModal">Create</button>
+                        <button id="unitSelectBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#selectModal">Select</button>
+
+                        <div id="createModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button id="closeModal" type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Create Unit</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="unitClient">
+                                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !unitName.valid }">
+                                                <label for="unitName">Unit Name</label>
+                                                <input type="text" class="form-control" name="unitName" [(ngModel)]="model.unitName" #unitName="ngModel" required />
+                                                <div class="unitReq help-block" *ngIf="f.submitted && !unitName.valid">Unit Name Is Required</div>
+
+                                                <input type="hidden" name="unitKey" [(ngModel)]="model.unitKey" #unitKey="ngModel" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="saveUnit" type="button" class="btn btn-default" (click)="submitCompanyUnit()" data-dismiss="modal">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="selectModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button id="closeModal" type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Select Unit</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="unitClientselct">
+                                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !unitKey.valid }">
+                                                <label for="unitKey">Unit</label>
+                                                <select name="unitKey" #unitKey="ngModel" class="form-control" [(ngModel)]="model.unitKey">
+                                                    <option value="undefined">Please select Unit</option>
+                                                    <option *ngFor="let item of companyUnitListByCompany"
+                                                            [ngValue]="item.unitKey" class="{{item.unitName}}">
+                                                        {{item.unitName}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="saveUnitFromSelect" class="btn btn-primary" (click)="submitUnitUpdate()" data-dismiss="modal">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

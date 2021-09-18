@@ -1,0 +1,97 @@
+﻿
+    <div class="breadcrumb">
+        <a [routerLink]="['/teammanage']" class="btn btn-link"><i class="glyphicon glyphicon-home"></i> Back</a>
+     
+    </div>
+
+    <form name="form" (ngSubmit)="f.form.valid && SubmitTeam()" #f="ngForm" novalidate>
+        <div class="col-md-10">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2 class="panel-title">Add New team</h2></div>
+                <div class="panel-body">
+                    <alert></alert>
+
+                    <div class="col-md-6">
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !teamName.valid }">
+                            <label for="teamName">Team Name <span class="text-danger"> *</span></label>
+                            <input type="text" class="form-control" name="teamName" [(ngModel)]="model.teamName" maxlength="100" #teamName="ngModel" required />
+                            <div *ngIf="f.submitted && !teamName.valid" class="help-block">Team Name is required</div>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !workTypeKey.valid }">
+                            <label for="workTypeKey">Work Type</label>
+                            <select name="workTypeKey" #workTypeKey="ngModel" class="form-control" [(ngModel)]="model.workTypeKey">
+                                <option value="undefined">Please select Work Type</option>
+                                <option *ngFor="let item of worktypelist"
+                                        [ngValue]="item.workTypeKey">
+                                    {{item.workTypeName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !methodologyKey.valid }">
+                            <label for="methodologyKey">Methodology</label>
+                            <select name="methodologyKey" #methodologyKey="ngModel" class="form-control" [(ngModel)]="model.methodologyKey">
+                                <option value="undefined">Please select Methodology</option>
+                                <option *ngFor="let w of methodologyList"
+                                        [ngValue]="w.methodologyKey">
+                                    {{w.methodologyName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !departmentKey.valid }">
+                            <label for="departmentKey">Department</label>
+                            <select name="departmentKey"
+                                    #departmentKey="ngModel"
+                                    class="form-control" [(ngModel)]="model.departmentKey">
+                                <option value="undefined">Please select Department</option>
+                                <option *ngFor="let item of departmentlist"
+                                        [ngValue]="item.departmentKey">
+                                    {{item.departmentName}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !dateEstablished.valid }">
+                            <label for="dateEstablished">Date Established</label>
+                            <input type="date" class="form-control" name="dateEstablished" [(ngModel)]="model.dateEstablished" #dateEstablished="ngModel" />
+                            <div *ngIf="f.submitted && !dateEstablished.valid" class="help-block">Date is not in correct format</div>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !agileAdoptedDate.valid }">
+                            <label for="agileAdoptedDate">Agile Adoption Date</label>
+                            <input type="date" class="form-control" name="agileAdoptedDate" [(ngModel)]="model.agileAdoptedDate" #agileAdoptedDate="ngModel" />
+                            <div *ngIf="f.submitted && !agileAdoptedDate.valid" class="help-block">Date is not in correct format</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !description.valid }">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" name="description" [(ngModel)]="model.description" #description="ngModel" />
+                            <div *ngIf="f.submitted && !description.valid" class="help-block">Description is required</div>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !teamBackground.valid }">
+                            <label for="teamBackground">Team Background</label>
+                            <input type="text" class="form-control" name="teamBackground" [(ngModel)]="model.teamBackground" #teamBackground="ngModel" />
+                            <div *ngIf="f.submitted && !teamBackground.valid" class="help-block">Team Background is not valid</div>
+                        </div>
+                        <u><h3>Team Tags</h3></u>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !businessLine.valid }">
+                            <label for="businessLine">Business Line</label>
+                            <input type="text" class="form-control" name="businessLine" [(ngModel)]="model.businessLine" #businessLine="ngModel" />
+                            <div *ngIf="f.submitted && !businessLine.valid" class="help-block">Business Line is not valid</div>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !strategicObject.valid }">
+                            <label for="strategicObject">Strategic Object</label>
+                            <input type="text" class="form-control" name="strategicObject" [(ngModel)]="model.strategicObject" #strategicObject="ngModel" />
+                            <div *ngIf="f.submitted && !strategicObject.valid" class="help-block">Strategic Object is not valid</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button [disabled]="loading" class="btn btn-primary">Create Team</button>
+
+                    <a [routerLink]="['/teammanage']" class="btn btn-link">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+ 

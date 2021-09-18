@@ -1,0 +1,68 @@
+﻿
+
+<div class="row">
+    <div class="col-md-6">
+        <form [formGroup]="countryForm" autocomplete="off" novalidate (ngSubmit)="submitCountryDetail()">
+
+          
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2 class="panel-title">Country Setup</h2></div>
+                <div class="panel-body">
+                    <alert></alert>
+                    <div class="form-group">
+                        <label for="countryCode">Country Code</label>
+                        <input type="text" class="form-control" formControlName="countryCode" [(ngModel)]="model.countryCode" />
+                        <div style="font-size: 1.2em;color:red">
+                            <em *ngIf="validateControl('countryCode') && checkError('countryCode', 'required')">Country Code is required</em>
+                            <em *ngIf="validateControl('countryCode') && checkError('countryCode', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                        </div>
+
+
+                    </div>
+                    <div class="form-group">
+                        <label for="countryName">Country Name</label>
+                        <input type="text" class="form-control" formControlName="countryName" maxlength="20" [(ngModel)]="model.countryName" />
+                        <div style="font-size: 1.2em;color:red">
+                            <em *ngIf="validateControl('countryName') && checkError('countryName', 'required')">Country Name is required</em>
+                            <em *ngIf="validateControl('countryName') && checkError('countryName', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="panel-footer">
+                    <button [disabled]="!countryForm.valid" class="btn btn-primary">Save</button>
+
+                </div>
+            </div>
+
+        </form>
+
+        <div class="table-responsive">
+
+            <table class='table' *ngIf='countryList && countryList.length'>
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Item of countryList">
+                        <td>{{ Item.countryCode }}</td>
+                        <td>{{ Item.countryName }}</td>
+
+                        <td>
+                            <a [routerLink]="" (click)="edit(Item)">Edit</a> |
+                            <a [routerLink]="" (click)="delete(Item)">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>
+        <div class="col-md-3">&nbsp;</div>
+
+    </div>

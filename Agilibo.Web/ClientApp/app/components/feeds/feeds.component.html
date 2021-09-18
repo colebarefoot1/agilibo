@@ -1,0 +1,167 @@
+﻿<!--<div class="row small" *ngIf="!loading">-->
+<div id="myModal1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Upcoming Sprint</h4>
+            </div>
+            <div class="modal-body">
+                <div *ngFor="let glass of group.allNextSprintList" class="small">
+                    <div class="form-group">
+
+                        <label for="sprintGoal"> Sprint Name:</label> {{glass.sprintName}}
+
+                        <div *ngIf="group.sprintGoal!=null">
+                            <label for="sprintGoal"> Sprint Goal :</label> {{glass.sprintGoal}}
+                        </div>
+                        <label for="sprintGoal"> Start Date :</label>  {{glass.sprintFrom | date :"dd.MM.yyyy"}}
+                        <label> End Date:</label> {{glass.sprintTo| date :"dd.MM.yyyy"}}
+                        <hr />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="position:fixed;">
+    <div class="row small" *ngIf="!loading">
+        <div class="panel">
+
+
+            <!--<button (click)="toggle()" id="bt" class="btn btn-info">
+                {{buttonName}}
+            </button>-->
+            <a data-toggle="modal" class="btn btn-info" id="bt" name="Logout" data-target="#myModal1"> Show Upcoming Sprint</a>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!--<ng-container *ngIf="show">
+        <div class="row small">
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <div class="row ScrollStyle" ng-show="mustShow">
+
+                            <div *ngFor="let glass of group.allNextSprintList" class="small">
+                                <div class="form-group">
+
+                                    <label for="sprintGoal"> Sprint Name:</label> {{glass.sprintName}}
+
+                                    <div *ngIf="group.sprintGoal!=null">
+                                        <label for="sprintGoal"> Sprint Goal :</label> {{glass.sprintGoal}}
+                                    </div>
+                                    <label for="sprintGoal"> Start Date :</label>  {{glass.sprintFrom | date :"dd.MM.yyyy"}}
+                                    <label> End Date:</label> {{glass.sprintTo| date :"dd.MM.yyyy"}}
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </ng-container>-->
+
+    <div class="create-status">
+        <form autocomplete="off" novalidate class="clearfix">
+            <div class="form-group">
+                <textarea class="form-control" rows="3" placeholder="Whats happening?" [(ngModel)]="statusText" (ngModelChange)="typingStatus()" name="statusText"></textarea>
+                <!--<em *ngIf="validateControl('statusText') && checkError('statusText', 'required')"></em>-->
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-primary btn-md" (click)="showUnitData()">Show unit wise</button>
+                <button class="btn btn-primary btn-md" (click)="showCompanyData()">Show company wise</button>
+
+            </div>
+            <div class="col-md-6">
+                <div class="pull-right">
+                    <button class="btn btn-primary btn-md" (click)="postHappy()">Happy</button>
+                    <button class="btn btn-primary btn-md" (click)="postKudo()">Kudo</button>
+                    <button [disabled]="!statusText" class="btn btn-primary btn-md" (click)="shareStatus()">Post Status</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <ng-container>
+        <div class="row">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="form-group list-group ScrollStyle2">
+                        <div class="list-group-item" *ngFor="let company of group.unitWiseMasterGroupList">
+
+                            <div class="msgDiv" *ngIf="company.messageTextUser">
+                                <div class="chat-message" text-left>
+                                    <div class="left-bubble">
+                                        <p text-wrap>{{company.messageText}}</p><br />
+                                        <span class="msg-name">{{company.messageTextUser}}</span><br />
+                                        <span class="msg-date">~ {{company.messageTextSendDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="kudoDIv" *ngIf="company.kudoTitle">
+                                <div class="imgdiv">
+                                    <div *ngIf="company.kudoImgPath">
+                                        <img class="kudoImage" [src]="kudoImagePath(company?.kudoImgPath)">
+                                    </div>
+                                    <div class="head">
+                                        <h4 class="kudoTitleColor" [style.background-color]="company.kudoTitleColor">{{company.kudoTitle}}</h4>
+                                        <p>From: {{company.fromEmailAddress}}</p>
+                                        <p>To: {{company.toReceiveEmail}}</p>
+                                        <p style="font-size: 10px;">{{company.kudoPostDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
+                                    </div>
+
+                                    <div class="kudomsg">
+                                        <p class="kudoText">
+                                            {{company.kudoText}}
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="happyDIv" *ngIf="company.happinessEvent">
+                                <div class="happyimgdiv">
+                                    <div class="col-sm-3" *ngIf="company.happinessImagePath">
+                                        <img class="imgmain" [src]="happyImagePath(company?.happinessImagePath)">
+                                    </div>
+                                    <div class="imgShow-info">
+                                        <br />
+                                        <div class="hevent">{{company.happinessEvent}}</div>
+                                        <div>
+                                            &nbsp;&nbsp;{{company.happinessFeedback}}
+                                        </div><br /><br />
+                                        <div class="postDate">
+                                            <p>{{company.happinessPostDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </ng-container>
+</div>
+
+
+

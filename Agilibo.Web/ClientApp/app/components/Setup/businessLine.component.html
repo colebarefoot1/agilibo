@@ -1,0 +1,51 @@
+﻿
+
+<div class="row">
+    <alert></alert>
+    <div class="col-md-6">
+        <form [formGroup]="businessLineForm" autocomplete="off" novalidate (ngSubmit)="submitBusinessLine()">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2 class="panel-title">BusinessLine Setup</h2></div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label for="businessLineName" class="control-label">BusinessLine name <span class="text-danger">**</span></label>
+                        <input type="text" id="businessLineName" class="form-control" formControlName="businessLineName" [(ngModel)]="model.businessLineName" />
+
+                        <div style="font-size: 1.2em;color:red">
+                            <em *ngIf="validateControl('businessLineName') && checkError('businessLineName', 'required')">BusinessLine Name is required</em>
+                            <em *ngIf="validateControl('businessLineName') && checkError('businessLineName', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <button [disabled]="!businessLineForm.valid" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <table class='table' *ngIf='products && products.length'>
+            <thead>
+                <tr>
+
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let product of products'>
+                    <td>{{ product.businessLineName }}</td>
+                    <td>
+                        <a [routerLink]="" (click)="edit(product)">Edit</a> |
+                        <a [routerLink]="" (click)="delete(product)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-3">&nbsp;</div>
+
+
+</div>

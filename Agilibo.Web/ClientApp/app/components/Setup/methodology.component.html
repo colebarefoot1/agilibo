@@ -1,0 +1,52 @@
+﻿
+<div class="row">
+    
+    <div class="col-md-6">
+        <alert></alert>
+        <form [formGroup]="methodologyForm" autocomplete="off" novalidate (ngSubmit)="submitMethodology()">
+            <div class="panel panel-default" id="panel">
+                <div class="panel-heading"><h2 class="panel-title">Methodology Setup</h2></div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label for="methodologyName" class="control-label">Methodology Name<span class="text-danger">**</span></label>
+                        <input type="text" id="methodologyName" class="form-control" formControlName="methodologyName" [(ngModel)]="model.methodologyName" />
+                        <div style="font-size: 1.2em;color:red">
+                            <em *ngIf="validateControl('methodologyName') && checkError('methodologyName', 'required')">Methodology Name is required</em>
+                            <em *ngIf="validateControl('methodologyName') && checkError('methodologyName', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+
+                    <button [disabled]="!methodologyForm.valid" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="table-responsive">
+            <table class='table' *ngIf='products && products.length'>
+                <thead>
+                    <tr>
+
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let product of products'>
+                        <td>{{ product.methodologyName }}</td>
+                        <td>
+                            <a [routerLink]="" (click)="edit(product)">Edit</a> |
+                            <a [routerLink]="" (click)="delete(product)">Delete</a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,140 @@
+<div class='main-nav' *ngIf="checkLogin()">
+    <!--<div class='main-nav'>-->
+    <div class='navbar navbar-inverse'>
+        
+        <div class='navbar-header'>
+            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+                <span class='sr-only'>Toggle navigation</span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+            </button>
+            <a [routerLink]="['/feeds']" class="navbar-brand" style="font-size:xx-large;color:#6dc5dd">AGILIBO</a>
+        </div>
+        <div class='clearfix'></div>
+        <div class='navbar-collapse collapse'>
+            <ul class='nav navbar-nav'>
+                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a [routerLink]="['/feeds']" name="Feeds">
+                        <span class='glyphicon glyphicon-home'></span> Home
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class='navbar-collapse collapse' id="d1">
+            <ul *ngIf='accessMenuHeader && accessMenuHeader.length' class='nav navbar-nav' id="accessMenu_ul">
+                <li *ngFor='let mitem of filterMainR()' id="{{mitem.title}}li">
+                    <a class="dropdown-toggle" data-toggle="dropdown" name="{{mitem.title}}">{{mitem.title}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu multi-level" id="{{mitem.title}}ul">
+                        <li *ngFor='let x of filterformsR(mitem.menuKey,0)' id="{{x.title}}li" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}">
+                            <a [routerLink]="x.titleLink" name="{{x.title}}" *ngIf="!x.isExternal">{{x.title}}</a>
+                            <a href="{{x.titleLink}}" name="{{x.title}}" *ngIf="x.isExternal" target="_blank">{{x.title}}</a>
+                        </li>
+                        <li *ngFor='let y of filtersubmenuR(mitem.menuKey,1)' class="dropdown-submenu" id="{{y.title}}li">
+                            <a data-toggle="dropdown" name="{{y.title}}">{{y.title}}</a>
+                            <ul class='dropdown-menu'>
+                                <li *ngFor='let x1 of filterformsR(y.menuKey,1)' [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}">
+                                    <a [routerLink]="x1.titleLink" name="{{x1.title}}" *ngIf="!x1.isExternal">{{x1.title}}</a>
+                                    <a href="{{x1.titleLink}}" name="{{x1.title}}" *ngIf="x1.isExternal" target="_blank">{{x1.title}}</a>
+                                </li>
+                                <li *ngFor='let y1 of filtersubmenuR(y.menuKey,2)' class="dropdown-submenu">
+                                    <a data-toggle="dropdown" name="{{y1.title}}">{{y1.title}}</a>
+                                    <ul class='dropdown-menu'>
+                                        <li *ngFor='let x2 of filterformsR(y1.menuKey,2)' [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}">
+                                            <a [routerLink]="x2.titleLink" name="{{x2.title}}" *ngIf="!x2.isExternal">{{x2.title}}</a>
+                                            <a href="{{x2.titleLink}}" name="{{x2.title}}" *ngIf="x2.isExternal" target="_blank">{{x2.title}}</a>
+                                        </li>
+                                        <li *ngFor='let y2 of filtersubmenuR(y1.menuKey,3)' class="dropdown-submenu">
+                                            <a data-toggle="dropdown" name="{{y2.title}}">{{y2.title}}</a>
+                                            <ul class='dropdown-menu'>
+                                                <li *ngFor='let x3 of filterformsR(y2.menuKey,3)' [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}">
+                                                    <a [routerLink]="x3.titleLink" name="{{x3.title}}" *ngIf="!x3.isExternal">{{x3.title}}</a>
+                                                    <a href="{{x3.titleLink}}" name="{{x3.title}}" *ngIf="x3.isExternal" target="_blank">{{x3.title}}</a>
+                                                </li>
+                                                <li *ngFor='let y3 of filtersubmenuR(y2.menuKey,4)' class="dropdown-submenu">
+                                                    <a data-toggle="dropdown" name="{{y3.title}}">{{y3.title}}</a>
+                                                    <ul class='dropdown-menu'>
+                                                        <li *ngFor='let x4 of filterformsR(y3.menuKey,4)' [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}">
+                                                            <a [routerLink]="x4.titleLink" name="{{x4.title}}" *ngIf="!x4.isExternal">{{x4.title}}</a>
+                                                            <a href="{{x4.titleLink}}" name="{{x4.title}}" *ngIf="x4.isExternal" target="_blank">{{x4.title}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!--<li><a href="http://89.145.160.220:7000/paymentgateway/index.php/admin_login" target="_blank">Payment</a></li>-->
+            </ul>
+        </div>
+        <!-- Role less Menu-->
+        <div *ngIf='mainformlist.length && formlist.length && submenu.length && menu.length' class='navbar-collapse' id="d2">
+            <ul *ngIf='menu && menu.length' class='nav navbar-nav'>
+                <li *ngFor='let mitem of menu'>
+                    <a class="dropdown-toggle" data-toggle="dropdown">{{mitem.menuName}}<span class="caret"></span></a>
+                    <ul *ngIf='mainformlist.length' class="dropdown-menu multi-level">
+                        <li *ngFor='let x of mainformlist' [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}">
+                            <a *ngIf='x.menuKey==mitem.menuKey' [routerLink]="x.titleLink" name="{{x.title}}">
+                                {{x.title}}
+                            </a>
+                        </li>
+                        <li *ngFor='let y of submenu' class="dropdown-submenu">
+                            <a *ngIf='y.menuKey==mitem.menuKey' name="{{y.title}}" data-toggle="dropdown">
+                                {{y.title}}
+                            </a>
+                            <ul *ngIf='formlist.length' class='dropdown-menu'>
+                                <li *ngFor='let p of formlist' [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}">
+                                    <a *ngIf='p.menuKey==y.subMenuKey' [routerLink]="p.titleLink" name="{{p.title}}">
+                                        {{p.title}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+             
+            </ul>
+        </div>
+        <div class='navbar-collapse collapse'>
+            <ul class='nav navbar-nav'>
+                <li>
+                    <a data-toggle="modal" name="Logout" data-target="#myModal"><span class='glyphicon glyphicon-log-out'></span> Logout</a>
+                </li>
+                <li>
+                    <button (click)="hideMenu()" name="HideMenu" class="customBookmark">Hide Menu</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Logout</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Are you sure you want to Logout?</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-default pull-right" (click)="logout()" data-dismiss="modal">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Email Verification notification-->
+<div *ngIf="!isEmailVerified">
+    <div id="snackbar">Your email address is not verified, please verify your email. If you have not received email yet please check spam.</div>
+</div>
+
+

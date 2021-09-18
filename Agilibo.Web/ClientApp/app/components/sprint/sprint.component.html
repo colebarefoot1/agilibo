@@ -1,0 +1,162 @@
+﻿
+                  
+<!--<ul class="nav nav-pills">
+    
+   
+    <li><a [routerLink]="['/manageTeam/', model.teamKey]">Go Back</a></li>
+
+</ul>-->
+<div class="row">
+    <alert></alert>
+    <div class="col-md-11">
+        <form [formGroup]="sprintForm" autocomplete="off" novalidate (ngSubmit)="Submit()">
+            <div class="row" id="sprint">
+                <div class="panel panel-default">
+                    <div class="page-header"><h3 class="text-center">Sprint: {{teamName}}</h3></div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="sprintName">Sprint Number/Name<span class="text-danger">**</span></label>
+                                <input type="text" class="form-control" formControlName="sprintName" [(ngModel)]="model.sprintName" />
+                                <div style="font-size: 1.2em;color:red">
+                                    <em *ngIf="validateControl('sprintName') && checkError('sprintName', 'required')">Sprint Number/Name is required</em>
+                                    <em *ngIf="validateControl('sprintName') && checkError('sprintName', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="sprintGoal">Sprint Goal<span class="text-danger">**</span></label>
+                                <input type="text" class="form-control" formControlName="sprintGoal" [(ngModel)]="model.sprintGoal" />
+                                <div style="font-size: 1.2em;color:red">
+                                    <em *ngIf="validateControl('sprintGoal') && checkError('sprintGoal', 'required')">Sprint Goal is required</em>
+                                    <em *ngIf="validateControl('sprintGoal') && checkError('sprintGoal', 'maxlength')">Maximum allowed length is 100 characters.</em>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="releasePlan">Release Plan</label>
+                                <input type="text" class="form-control" formControlName="releasePlan" [(ngModel)]="model.releasePlan"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="storyPointCommited">Story Points Committed</label>
+                                <input type="number" class="form-control" formControlName="storyPointCommited" [(ngModel)]="model.storyPointCommited" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sprintDurationKey">Duration<span class="text-danger">**</span></label>
+                                <select formControlName="sprintDurationKey" (change)="clearDate()" class="form-control" [(ngModel)]="model.sprintDurationKey">
+
+                                    <option *ngFor="let w of durationList"
+                                            [ngValue]="w.sprintDurationKey">
+                                        {{w.sprintDurationValue}}
+                                    </option>
+                                </select>
+                                <div style="font-size: 1.2em;color:red">
+                                    <em *ngIf="validateControl('sprintDurationKey') && checkError('sprintDurationKey', 'required')">Sprint Duration is required</em>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sprintFrom">(Starting From)<span class="text-danger">**</span></label>
+
+                                <input type="date" class="form-control" (change)="selectchange(model.sprintDurationKey)" formControlName="sprintFrom" [(ngModel)]="model.sprintFrom" />
+                                <div style="font-size: 1.2em;color:red">
+                                    <em *ngIf="validateControl('sprintFrom') && checkError('sprintFrom', 'required')">sprint Duration is required</em>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="model.sprintFrom">
+                                <label for="sprintTo">(End Date)<span class="text-danger">**</span></label>
+
+                                {{model.sprintTo| date}}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="storyPointCompleted">Story Points Completed</label>
+                                <input type="number" class="form-control" formControlName="storyPointCompleted" [(ngModel)]="model.storyPointCompleted" />
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="panel-footer">
+
+                        <a [routerLink]="['/sprintsetting']" class="btn btn-primary">Cancel</a>
+                        <button [disabled]="!sprintForm.valid" class="btn btn-primary pull-right">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row" *ngIf='sprintlist && sprintlist.length'>
+            <div class="table-responsive col-md-12">
+                <h4>List of All Sprint of Team : {{teamName}}</h4>
+
+                <table class="table table-condensed table-bordered">
+                    <tr><th>Sprint Name</th><th>Goal</th><th>Duration</th><th>From</th><th>To</th><th>Points Committed</th><th>Points Completed</th><th>Created on</th><th></th><th></th><th></th></tr>
+
+                    <tr *ngFor='let item of sprintlist'>
+                        <td>{{ item.sprintName }}</td>
+                        <td>{{ item.sprintGoal }}</td>
+                        <td>{{item.sprintDurationValue}}</td>
+                        <td>{{ item.sprintFrom | date :  "dd.MM.yyyy"}}</td>
+                        <td>{{ item.sprintTo | date :  "dd.MM.yyyy" }}</td>
+                        <td>{{ item.commitPoint }}</td>
+                        <td>{{ item.completePoint }}</td>
+                        <td>{{ item.createdOn |date:'medium' }}</td>
+                        <td>
+                            <a [routerLink]="" (click)="edit(item.sprintKey)">Edit</a>
+                        </td>
+                        <td>
+                            <button (click)="view(item.sprintKey)" data-toggle="modal" data-target="#sprintmodal">View</button>
+                        </td>
+                        <td> <a [routerLink]="" (click)="delete(item.sprintKey)">Remove</a></td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="sprintmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="clear()" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Sprint Information</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Sprint Name/Number : </label> {{viewmodel.sprintName}}
+                    </div>
+                    <div class="form-group">
+                        <label>Sprint Goal : </label> {{viewmodel.sprintGoal}}
+                    </div>
+                    <div class="form-group">
+                        <label>Release Plan : </label> {{viewmodel.releasePlan}}
+                    </div>
+                    <div class="form-group">
+                        <label> Sprint Duration (From) : </label> {{viewmodel.sprintFrom | date :  "dd.MM.yyyy"}}  <label> (To) : </label> {{viewmodel.sprintTo | date :  "dd.MM.yyyy"}}
+                    </div>
+                    <div class="form-group">
+                        <label> Story Points Committed : </label> {{viewmodel.storyPointCommited}}
+                    </div>
+                    <div class="form-group">
+                        <label> Story Points Completed : </label> {{viewmodel.storyPointCompleted}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="clear()" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>

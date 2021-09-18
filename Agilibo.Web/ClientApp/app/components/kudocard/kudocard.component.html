@@ -1,0 +1,54 @@
+﻿<div class="row manDivKudo">
+    <div class="col-md-8">
+        <form [formGroup]="kudoForm"  autocomplete="off" novalidate (ngSubmit)="postKudoCard()">
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2 class="panel-title paneltext">KudoCards</h2></div>
+                <div class="panel-body">
+                    <alert></alert>
+                    <div id="first" class="form-group">
+                        <label for="kudocard" class="formlebeltext">Select your card : </label>
+
+                        <button id="selectkudo" class="btn btn-primary kudoButton" round (click)="goToKudoCardsList()">select card</button>
+
+                    </div>
+                    <div *ngIf="card.color" class="form-group">
+                        <div class="item">
+                            <label for="recipientEmailAddress" class="formlebeltext">Recipient Email Address: : </label>
+                            <input type="email" class="form-control" formControlName="recipientEmailAddress" [(ngModel)]="model.recipientEmailAddress" /><br />
+                            <div style="font-size: 1.2em;color:red">
+                                <em class="emailReq" *ngIf="validateControl('recipientEmailAddress') && checkError('recipientEmailAddress', 'required')">Recipient Email is required</em>
+                                <em class="emailvalid" *ngIf="validateControl('recipientEmailAddress') && checkError('recipientEmailAddress', 'pattern')">Enter a valid email.</em>
+                            </div>
+                        </div>
+                        <h4 class="cardbutton" type="button" [style.background-color]="card.color">{{card.title}}</h4>
+                        <div class="a-wrapper">
+                            <div class="item">
+                                <div class="thumbnail" style="float:right">
+                                    <img class="card-img" [src]="cardImg" />
+                                </div>
+                                <h2>{{card.title}}</h2>
+                                <p>To: {{model.recipientEmailAddress}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="kudoMessage" class="formlebeltext">Write your message: </label>
+                        <textarea class="customtextarea" autosize type="text" formControlName="kudoMessage" [(ngModel)]="model.kudoMessage" overflow-scroll="true" placeholder="Write your Kudo Card"></textarea>
+                        <div style="font-size: 1.2em;color:red">
+                            <em class="kudoMsgReq" *ngIf="validateControl('kudoMessage') && checkError('kudoMessage', 'required')">Please write kudo feedback</em>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="panel-footer">
+                    <button id="kudosavebutton" [disabled]="!kudoForm.valid" class="btn btn-primary">SHARE MY KUDO</button>
+
+                </div>
+            </div>
+
+        </form>
+</div>
+</div>

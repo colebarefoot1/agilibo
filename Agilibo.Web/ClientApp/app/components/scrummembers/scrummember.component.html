@@ -1,0 +1,85 @@
+﻿
+                  <div class="breadcrumb">
+                      <a [routerLink]="['/teammanage']" class="btn btn-link"><i class="glyphicon glyphicon-home"></i>Back</a>
+                      <a [routerLink]="['/addexisting/', usermodel.teamKey]">Add Existing Users to Team</a>
+                  </div>
+
+<form name="form" (ngSubmit)="f.form.valid && Submit()" #f="ngForm" novalidate>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h2 class="panel-title">Add Member to {{teammodel.teamName}}</h2></div>
+            <div class="panel-body">
+
+                <alert></alert>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="firstName"><span class="text-danger">**</span>Name</label>
+                        <input type="text" class="form-control" name="firstName" [(ngModel)]="usermodel.firstName" #firstName="ngModel" maxlength="100" required />
+                        <!--<div *ngIf="f.submitted && !firstName.valid" class="help-block">Name is required</div>-->
+                    </div>
+                    <input type="hidden" name="teamKey" [(ngModel)]="usermodel.teamKey" #teamKey="ngModel" />
+
+                    <div class="form-group">
+                        <label for="email"><span class="text-danger">**</span>Email</label>
+                        <input type="text" class="form-control" name="email" [(ngModel)]="usermodel.email" #email="ngModel" maxlength="80" required />
+                        <!--<div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>-->
+                    </div>
+
+
+                    <!--<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !scrumRoleKey.valid }">
+                        <label for="scrumRoleKey">Scrum Role</label>
+                        <select name="scrumRoleKey" #scrumRoleKey="ngModel" class="form-control" [(ngModel)]="usermodel.scrumRoleKey">
+                            <option value="undefined">Please select Scrum Role</option>
+                            <option *ngFor="let item of scrumrolelist"
+                                    [ngValue]="item.scrumRoleKey">
+                                {{item.roleName}}
+                            </option>
+                        </select>
+                        <div *ngIf="f.submitted && !scrumRoleKey.valid" class="help-block">Scrum Role is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !scrumDevelopemntRoleKey.valid }">
+                        <label for="scrumDevelopemntRoleKey">Scrum Development Role</label>
+                        <select name="scrumDevelopemntRoleKey" #scrumDevelopemntRoleKey="ngModel" class="form-control" [(ngModel)]="usermodel.scrumDevelopemntRoleKey">
+                            <option value="undefined">Please select Development Role</option>
+                            <option *ngFor="let w of devrolelist"
+                                    [ngValue]="w.scrumDevelopemntRoleKey">
+                                {{w.roleName}}
+                            </option>
+                        </select>
+                        <div *ngIf="f.submitted && !scrumDevelopemntRoleKey.valid" class="help-block">Scrum Role is required</div>
+                    </div>-->
+                   
+                    <div class="form-group">
+                        <button [disabled]="loading" class="btn btn-primary">Invite Member to Team</button>
+
+                    </div>
+
+
+                </div>
+                <div class="col-md-7">
+                  
+                    <div class="table-responsive">
+                        <h4>Existing Members of the team</h4>
+                        <table class='table' *ngIf='teamdetail && teamdetail.length'>
+                            <thead>
+                                <tr><th>Name</th><th>Job Title</th><th>Email</th><th>Skype</th><th>Role</th><th>Dev. Role</th><th></th></tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor='let item of teamdetail'>
+                                    <td>{{ item.personName }}</td>
+                                    <td>{{ item.jobTitle }}</td>
+                                    <td>{{ item.email }}</td>
+                                    <td>{{ item.skypeID }}</td>
+                                    <td>{{ item.roleName }}</td>
+                                    <td>{{ item.devRoleName }}</td>
+                                    <td> <a [routerLink]="" (click)="delete(item)">Delete</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</form>

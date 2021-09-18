@@ -1,0 +1,171 @@
+﻿<div class="breadcrumb">
+
+    <a [routerLink]="['/crossTeamDependency/']">Report Dependency</a>
+    <a [routerLink]="['/dependencyGrid']" class="btn btn-link"> Dependency Grid</a>
+</div>
+
+<form name="form" (ngSubmit)="submit()" #f="ngForm">
+    <div class="col-md-12">
+        <alert></alert>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h2 class="panel-title">Report Dependency</h2></div>
+            <div class="panel-body">
+
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="primaryTeamKey">Which team are you?</label>
+                        <select name="primaryTeamKey" #primaryTeamKey="ngModel" (change)="getPrimarySprint()" class="form-control" [(ngModel)]="model.primaryTeamKey">
+                            <option value="undefined">Please select Your team</option>
+                            <option *ngFor="let item of primaryTeam"
+                                    [ngValue]="item.teamKey">
+                                {{item.teamName}}
+                            </option>
+                        </select>
+                        <div *ngIf="hasprimaryTeamKey" class="text-danger">Primary Team is required</div>
+                    </div>
+                    <input type="hidden" name="crossTeamDependencyKey" [(ngModel)]="model.crossTeamDependencyKey" #crossTeamDependencyKey="ngModel" />
+
+                    <div class="form-group">
+                        <label for="dependencyUserStory">Which User Story of yours have dependency?</label>
+                        <input type="text" class="form-control" name="dependencyUserStory" [(ngModel)]="model.dependencyUserStory" #dependencyUserStory="ngModel"/>
+                        <div *ngIf="hasdependencyUserStory" class="text-danger">Dependency User Story is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="primaryTeamSprintKey">Primary Sprint</label>
+                        <select name="primaryTeamSprintKey" #primaryTeamSprintKey="ngModel" class="form-control" [(ngModel)]="model.primaryTeamSprintKey">
+                            <option value="undefined">Please select Sprint</option>
+                            <option *ngFor="let w of primarySprint"
+                                    [ngValue]="w.sprintKey">
+                                {{w.sprintName}}
+                            </option>
+                        </select>
+                        <div *ngIf="hasprimaryTeamSprintKey" class="text-danger">Primary Sprint is required</div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="typeofDependencyKey">Type of Dependency you have?</label>
+                        <select name="typeofDependencyKey" #typeofDependencyKey="ngModel" (change)="getExternal()" class="form-control" [(ngModel)]="model.typeofDependencyKey">
+                            <option value="undefined">Please select Dependency Type</option>
+                            <option *ngFor="let item of dependencyTypelist"
+                                    [ngValue]="item.typeofDependencyKey">
+                                {{item.typeName}}
+                            </option>
+                        </select>
+                        <div *ngIf="hastypeofDependencyKey" class="text-danger">Dependency Type is required</div>
+                    </div>
+                    <div *ngIf="IsInternal">
+                        <div class="form-group">
+                            <label for="dependentOnTeamKey">On which team do you have dependency?</label>
+                            <select name="dependentOnTeamKey" #dependentOnTeamKey="ngModel" (change)="getDependentSprint()" class="form-control" [(ngModel)]="model.dependentOnTeamKey">
+                                <option value="undefined">Please select Your team</option>
+                                <option *ngFor="let item of dependentTeam"
+                                        [ngValue]="item.teamKey">
+                                    {{item.teamName}}
+                                </option>
+                            </select>
+                            <div *ngIf="hasdependentOnTeamKey" class="text-danger">Dependent Team is required</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dependentOnTeamSprintKey">Dependency Sprint</label>
+                            <select name="dependentOnTeamSprintKey" #dependentOnTeamSprintKey="ngModel" class="form-control" [(ngModel)]="model.dependentOnTeamSprintKey">
+                                <option value="undefined">Please select Dependent Sprint</option>
+                                <option *ngFor="let w of dependentSprint"
+                                        [ngValue]="w.sprintKey">
+                                    {{w.sprintName}}
+                                </option>
+                            </select>
+                            <div *ngIf="hasdependentOnTeamSprintKey" class="text-danger">Dependency Sprint is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dependentUserStory">User Story on which the Primary is Dependent on</label>
+                            <input type="text" class="form-control" name="dependentUserStory" [(ngModel)]="model.dependentUserStory" #dependentUserStory="ngModel" />
+                            <div *ngIf="hasdependentUserStory" class="text-danger">User Story on which the Primary is Dependent on is required</div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="IsExternal">
+
+                        <div class="form-group">
+                            <label for="externalteam">External Team/Member</label>
+                            <input type="text" class="form-control" name="externalteam" [(ngModel)]="model.externalteam" #externalteam="ngModel" />
+                            <div *ngIf="hasexternalteam" class="text-danger">Please enter external team name</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-footer">
+                <button [disabled]="loading" class="btn btn-primary">Save</button>
+                
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="col-md-12">
+    <h4>List of Dependency</h4>
+    <div class="row">
+        <div class="col-md-6"><input type="text" placeholder="Main User Story" class="form-control" [(ngModel)]="filter" name="filter" id="filter" /></div>
+        <div class="col-md-4">
+            <input type="button" (click)="search()" class="btn btn-success" value="Search" />
+            <button [disabled]="loading" (click)="clearForm()" class="btn btn-primary">Clear</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="table-responsive">
+
+                <table class='table table-bordered' *ngIf='pagedItems && pagedItems.length'>
+                    <thead>
+                        <tr><th>Primary Team</th><th>Dependency Type</th><th>Dependent Team</th><th>Primary Sprint</th>
+                        <th>Primary User Story</th><th>Dependent Sprint</th><th>Dependent User Story</th><th></th><th></th></tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let item of pagedItems'>
+                            <td>{{ item.primaryTeamName }}</td>
+                            <td>{{ item.dependencyTypeName }}</td>
+                            <td>{{ item.dependentTeamName }}</td>
+                            <td>
+                                {{ item.primaryTeamSprint }}<br />
+                                {{ item.primaryTeamSprintFrom }} <br />
+                                {{ item.primaryTeamSprintTo }}
+                            </td>
+                            <td>{{ item.dependencyUserStory }}</td>
+                            <td>
+                                <div *ngIf='item.isExternal'></div>
+                                <div *ngIf='!item.isExternal'>
+                                    {{ item.dependentTeamSprint }}<br />
+                                    {{ item.dependentTeamSprintFrom }} <br />
+                                    {{ item.dependentTeamSprintTo }}
+                                </div>
+                            </td>
+                            <td>{{item.dependentUserStory}}</td>
+                            <td> <a [routerLink]="" (click)="delete(item.crossTeamDependencyKey,item.isExternal)">Delete</a></td>
+                            <td> <a [routerLink]="" (click)="edit(item.crossTeamDependencyKey,item.isExternal)">Edit</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(1)">First</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                    </li>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                        <a (click)="setPage(page)">{{page}}</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.totalPages)">Last</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

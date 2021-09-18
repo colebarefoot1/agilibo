@@ -1,0 +1,34 @@
+﻿
+<div class="row">
+    <div class="table-responsive">
+        <div class="col-md-11">
+            <alert></alert>
+            <h4>My Teams</h4>
+
+            <table class="table table-condensed table-bordered" *ngIf='myScrumteams && myScrumteams.length'>
+                <tr><th>Name</th><th>Department</th><th>Work Type</th><th>Methodology</th><th></th></tr>
+
+
+                <tr *ngFor='let item of myScrumteams'>
+                    <td>{{ item.teamName }}</td>
+                    <td>{{ item.department }}</td>
+                    <td>{{ item.workType }}</td>
+                    <td>{{ item.methodology }}</td>
+
+                  
+                    <td>
+                        <label *ngIf='checkForDefault(item.setDefault)'>{{item.setDefault}}</label>
+                        <button *ngIf='!checkForDefault(item.setDefault)' (click)="setDefaultTeam(item.teamKey,item.userKey)">Set Default</button>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+

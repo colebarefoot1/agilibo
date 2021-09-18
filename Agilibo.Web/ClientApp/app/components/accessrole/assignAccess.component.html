@@ -1,0 +1,61 @@
+﻿<div class="breadcrumb">
+    <a [routerLink]="['/accessrole/']">Create Role</a> ||
+    <a [routerLink]="['/assignaccess/']">Assign Role</a>||
+
+</div>
+<div class="row">
+
+    <div class="col-md-9">
+        <alert></alert>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>List of all Users</h3></div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr><th>Name</th><th>Email</th><th>Role Name</th><th>Controls</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let item of userlist'>
+                                <td>{{ item.fullName }}</td>
+                                <td>{{ item.email}}</td>
+                                <td>{{ item.roleName}}</td>
+                                <td>
+                                    <a *ngIf="item.roleKey>0" [routerLink]="" (click)="delete(item)">Remove</a> ||
+                                    <button (click)="assign(item)" data-toggle="modal" data-target="#myroleModal">Assign / Change</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myroleModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Select Access Role for {{model.fullName}}</h4>
+            </div>
+            <div class="modal-body">
+                <select name="roleKey"
+                        #roleKey="ngModel"
+                        class="form-control" [(ngModel)]="model.roleKey">
+                    <option value="undefined">Please select Role</option>
+                    <option *ngFor="let item of roleList"
+                            [ngValue]="item.roleKey">
+                        {{item.roleName}}
+                    </option>
+                </select>
+                <hr />
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="saveData()" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

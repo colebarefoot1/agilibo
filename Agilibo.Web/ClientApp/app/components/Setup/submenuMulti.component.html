@@ -1,0 +1,69 @@
+﻿
+<div class="breadcrumb">
+    <a [routerLink]="['/menu/']">Fixed Header</a> |||
+    <a [routerLink]="['/submenu/']">Submenu Directly under Fixed Header</a> |||
+    <a [routerLink]="['/submenuMulti/']">Multi Level Submenu</a> |||
+    <a [routerLink]="['/formsUnderFixedMenu/']">Forms Under Fixed Header</a> |||
+    <a [routerLink]="['/formsUnderSubMenu/']">Forms Under Sub-Header</a>
+</div>
+<div class="row">
+
+    <div class="col-md-9">
+        <alert></alert>
+        <form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2 class="panel-title">Submenu(Multi Level)</h2></div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="menuKey">Root Menu</label>
+                        <select name="menuKey"
+                                #menuKey="ngModel"
+                                class="form-control" [(ngModel)]="model.menuKey">
+
+                            <option *ngFor="let item of subdropdown"
+                                    [ngValue]="item.subMenuKey">
+                                {{item.title}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
+                        <label for="title">Submenu title</label>
+                        <input type="text" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" required />
+
+                        <input type="hidden" name="subMenuKey" [(ngModel)]="model.subMenuKey" #subMenuKey="ngModel" />
+                        <div *ngIf="f.submitted && !title.valid" class="help-block">Menu title is required</div>
+                    </div>
+
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !displayLevel.valid }">
+                        <label for="displayLevel">Display Level</label>
+                        <input type="number" class="form-control" name="displayLevel" [(ngModel)]="model.displayLevel" #displayLevel="ngModel" required />
+                        <div *ngIf="f.submitted && !displayLevel.valid" class="help-block">Display Level is required</div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
+        <table class='table' *ngIf='submenulist && submenulist.length'>
+            <thead>
+                <tr><th>Menu</th><th>Title</th><th>Display Level</th><th></th></tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let item of submenulist'>
+                    <td>{{ item.menuName }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.displayLevel }}</td>
+
+                    <td>
+                        <a [routerLink]="" (click)="edit(item)">Edit</a> |
+                        <a [routerLink]="" (click)="delete(item)">Delete</a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>

@@ -1,0 +1,54 @@
+﻿
+<div class="breadcrumb">
+    <a [routerLink]="['/menu/']">Fixed Header</a> |||
+    <a [routerLink]="['/submenu/']">Submenu Directly under Fixed Header</a>|||
+    <a [routerLink]="['/submenuMulti/']">Multi Level Submenu</a> |||
+    <a [routerLink]="['/formsUnderFixedMenu/']">Forms Under Fixed Header</a> |||
+    <a [routerLink]="['/formsUnderSubMenu/']">Forms Under Sub-Header</a>
+</div>
+<div class="row">
+    <alert></alert>
+    <div class="col-md-6">
+        <form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2 class="panel-title">Menu Header</h2></div>
+                <div class="panel-body">
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !menuName.valid }">
+                        <label for="menuName">Menu Name</label>
+                        <input type="text" class="form-control" name="menuName" [(ngModel)]="model.menuName" #menuName="ngModel" required />
+
+                        <input type="hidden" name="menuKey" [(ngModel)]="model.menuKey" #menuKey="ngModel" />
+                        <div *ngIf="f.submitted && !menuName.valid" class="help-block">Menu name is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !displayLevel.valid }">
+                        <label for="displayLevel">Display Index</label>
+                        <input type="number" class="form-control" name="displayLevel" [(ngModel)]="model.displayLevel" #displayLevel="ngModel" required />                       
+                        <div *ngIf="f.submitted && !displayLevel.valid" class="help-block">Menu name is required</div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
+        <table class='table' *ngIf='menulist && menulist.length'>
+            <thead>
+                <tr><th>Name</th><th>Index</th><th></th></tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let product of menulist'>
+                    <td>{{ product.menuName }}</td>
+                    <td>{{product.displayLevel}}</td>
+                    <td>
+                        <a [routerLink]="" (click)="edit(product)">Edit</a> |
+                        <a [routerLink]="" (click)="delete(product)">Delete</a>
+                    </td>
+                  
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-3">&nbsp;</div>
+
+
+</div>

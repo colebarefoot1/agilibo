@@ -1,0 +1,58 @@
+﻿
+
+<div class="row">
+   
+    <form [formGroup]="comapnyUnitSetupForm" autocomplete="off" novalidate (ngSubmit)="submitCompanyUnit()">
+        <div class="col-md-8">
+            <alert></alert>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>Company Unit Setup</h2></div>
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="unitName">Unit Name</label>
+                            <input type="text" class="form-control" formControlName="unitName" [(ngModel)]="model.unitName" />
+                            <div style="font-size: 1.2em;color:red">
+                                <em class="nameReq" *ngIf="validateControl('unitName') && checkError('unitName', 'required')">Unit Name is required</em>
+                                <em class="nameLength" *ngIf="validateControl('unitName') && checkError('unitName', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button id="saveUnit" [disabled]="!comapnyUnitSetupForm.valid" class="btn btn-primary">Save</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="col-md-8 panel-body">
+
+        <table class='table' *ngIf='companyUnitList && companyUnitList.length'>
+            <thead>
+                <tr>
+                    <th>Name</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let Item of companyUnitList">
+                    <td>{{ Item.unitName }}</td>
+
+                    <td>
+                        <a id="unitEdit" [routerLink]="" (click)="edit(Item)">Edit</a> |
+                        <a id="deleteUnit" [routerLink]="" (click)="delete(Item)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-3">&nbsp;</div>
+
+</div>

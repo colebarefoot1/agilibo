@@ -1,0 +1,249 @@
+﻿.people {
+    color: #000000;
+    background-color: #2783e0;
+}
+
+.technology {
+    color: #000000;
+    background-color: #1b7e21;
+}
+
+.domain {
+    color: #ffffff;
+    background-color: #7d0dd6;
+}
+
+.software {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.external {
+    color: #ffffff;
+    background-color: #ff0000;
+}
+
+.legend {
+    top: 91px;
+    position: fixed;
+    right: 14px;
+    max-width:220px;
+}
+
+.legend-arrow {
+    font-size: 20px !important;
+    margin-right: 12px;
+    color: #000000 !important;
+    text-shadow: 0 2px 2px rgba(255,255,255,0.7), 0 6px 2px rgba(0,0,0,0.5) !important;
+}
+
+.legend .table-bordered {
+    font-size: 10px;
+}
+
+.legend h5 {
+    font-size: 14px;
+}
+
+.cell-wrapper {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+    .cell-wrapper:last-child {
+        border-bottom: none;
+    }
+
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 2px;
+}
+
+    .flex-container > div {
+        margin: 2px;
+        text-align: center;
+    }
+
+        .flex-container > div.main {
+            width: 100%;
+            margin: 2px;
+            align-self: center;
+        }
+
+            .flex-container > div.main .v-num-wrapper {
+                display: flex;
+                justify-content: center;
+            }
+
+                .flex-container > div.main .v-num-wrapper .v-num {
+                    background-color: #FFFF00;
+                    width: 35px;
+                    height: 35px;
+                    margin: 2px;
+                    -moz-box-shadow: inset 0 0 1px #000000;
+                    -webkit-box-shadow: inset 0 0 1px #000000;
+                    box-shadow: inset 0 0 1px #000000;
+                }
+
+                .flex-container > div.main .v-num-wrapper .num {
+                    line-height: 2.5;
+                }
+
+    .flex-container > .arrow-container {
+        display: flex;
+        justify-content: center;
+        flex-flow: column;
+        min-width: 45px;
+    }
+
+    .flex-container.h-num-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+.a-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.arrow {
+    display: inline-block;
+    transform: scaleX(2.5);
+    text-shadow: 0 2px 2px rgba(255,255,255,0.7), 0 10px 4px rgba(0,0,0,0.5);
+    font-size: 40px;
+}
+
+.arrow:hover {
+    transition: all 0.2s ease;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+}
+
+    .arrow.t1 {
+        color: #2783e0;
+    }
+
+    .arrow.t2 {
+        color: #1b7e21;
+    }
+
+    .arrow.t3 {
+        color: #7d0dd6;
+    }
+
+    .arrow.t4 {
+        color: #000000;
+    }
+
+    .arrow.t5 {
+        color: #ff0000;
+    }
+
+    .arrow.d1 {
+        transform: rotate(-90deg);
+    }
+
+    .arrow.d2 {
+        transform: rotate(-45deg);
+    }
+
+    .arrow.d3 {
+        transform: rotate(360deg);
+    }
+
+    .arrow.d4 {
+        transform: rotate(-135deg);
+    }
+
+    .arrow.d5 {
+        transform: rotate(180deg);
+    }
+
+.v-val {
+    color: #ffffff;
+    position: absolute;
+    font-size: 10px;
+    width:14px;
+}
+
+    .v-val.d1 {
+        top: 22px;
+        left: 20px;
+    }
+
+    .v-val.d2 {
+        top: 26px;
+        left: 19px;
+    }
+
+    .v-val.d3 {
+        top: 26px;
+        left: 13px;
+    }
+
+    .v-val.d4 {
+        top: 19px;
+        left: 18px;
+    }
+
+    .v-val.d5 {
+        top: 19px;
+        left: 13px;
+    }
+
+.blink_me {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {
+    0% {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.0;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@-webkit-keyframes blinker {
+    0% {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.0;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@keyframes blinker {
+    0% {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.0;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}

@@ -1,0 +1,371 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <Version>0.0.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+    <Content Remove="ClientApp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\terms.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\AppConfig.ts" />
+    <None Remove="ClientApp\app\components\accessrole\accessRole.component.ts" />
+    <None Remove="ClientApp\app\components\accessrole\assignAccess.component.ts" />
+    <None Remove="ClientApp\app\components\accessrole\editRole.component.ts" />
+    <None Remove="ClientApp\app\components\accessrole\userRoleList.component.ts" />
+    <None Remove="ClientApp\app\components\account\register.component.ts" />
+    <None Remove="ClientApp\app\components\account\signin.component.ts" />
+    <None Remove="ClientApp\app\components\alert\alert.component.ts" />
+    <None Remove="ClientApp\app\components\clientcompany\clientcompany.component.ts" />
+    <None Remove="ClientApp\app\components\companyunit\companyunit.component.ts" />
+    <None Remove="ClientApp\app\components\companyunit\companyunitsetup.component.ts" />
+    <None Remove="ClientApp\app\components\country\country.component.ts" />
+    <None Remove="ClientApp\app\components\crossTeam\crossTeamDependency.component.ts" />
+    <None Remove="ClientApp\app\components\crossTeam\dependencyGrid.component.ts" />
+    <None Remove="ClientApp\app\components\feeds\feeds.component.ts" />
+    <None Remove="ClientApp\app\components\forgotpassword\forgotpassword.component.ts" />
+    <None Remove="ClientApp\app\components\forgotpassword\forgotpasswordmail.component.ts" />
+    <None Remove="ClientApp\app\components\forgotpassword\forgotpasswordreset.component.ts" />
+    <None Remove="ClientApp\app\components\forgotpassword\forgotpasswordresetsuccess.component.ts" />
+    <None Remove="ClientApp\app\components\happinessdoor\happinessdoor.component.ts" />
+    <None Remove="ClientApp\app\components\home\agilibo.component.ts" />
+    <None Remove="ClientApp\app\components\invitemember\invitemember.component.ts" />
+    <None Remove="ClientApp\app\components\kpi\velocityChart\velocitykpi.component.ts" />
+    <None Remove="ClientApp\app\components\kpi\velocityChart\viewteam.component.ts" />
+    <None Remove="ClientApp\app\components\kudocard\kudocard.component.ts" />
+    <None Remove="ClientApp\app\components\kudocard\kudocardbox.component.ts" />
+    <None Remove="ClientApp\app\components\kudocard\kudocardlist.component.ts" />
+    <None Remove="ClientApp\app\components\pageVisitor\pagevisitor.component.ts" />
+    <None Remove="ClientApp\app\components\passwordreset\passwordreset.component.ts" />
+    <None Remove="ClientApp\app\components\playpocker\playpocker.component.ts" />
+    <None Remove="ClientApp\app\components\pokerpointsetting\pokerpointsetting.component.ts" />
+    <None Remove="ClientApp\app\components\poker\poker.component.ts" />
+    <None Remove="ClientApp\app\components\policy\policy.component.ts" />
+    <None Remove="ClientApp\app\components\scrummembers\addexisting.component.ts" />
+    <None Remove="ClientApp\app\components\scrummembers\scrummember.component.ts" />
+    <None Remove="ClientApp\app\components\scrumTeam\manageteam.component.ts" />
+    <None Remove="ClientApp\app\components\scrumTeam\scrumteam.component.ts" />
+    <None Remove="ClientApp\app\components\scrumTeam\teammanage.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\businessLine.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\department.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\employmentType.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\formsUnderSubMenu.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\fromsUnderFixedMenu.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\menuHeader.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\methodology.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\scrumdevrole.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\scrumRole.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\submenu.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\submenuMulti.component.ts" />
+    <None Remove="ClientApp\app\components\Setup\workType.component.ts" />
+    <None Remove="ClientApp\app\components\sprintSetting\sprintSetting.component.ts" />
+    <None Remove="ClientApp\app\components\sprint\sprint.component.ts" />
+    <None Remove="ClientApp\app\components\team\team.component.ts" />
+    <None Remove="ClientApp\app\components\userprofile\userprofile.component.ts" />
+    <None Remove="ClientApp\app\filters\dependencyFilter.pipe.ts" />
+    <None Remove="ClientApp\app\models\AccessRole.ts" />
+    <None Remove="ClientApp\app\models\BusinessLine.ts" />
+    <None Remove="ClientApp\app\models\ClientCompany.ts" />
+    <None Remove="ClientApp\app\models\Company.ts" />
+    <None Remove="ClientApp\app\models\CompanyUnit.ts" />
+    <None Remove="ClientApp\app\models\Country.ts" />
+    <None Remove="ClientApp\app\models\CrossTeamDependency.ts" />
+    <None Remove="ClientApp\app\models\Department.ts" />
+    <None Remove="ClientApp\app\models\EmploymentType.ts" />
+    <None Remove="ClientApp\app\models\EstimateSettingPlanningPoker.ts" />
+    <None Remove="ClientApp\app\models\ImageMessage.ts" />
+    <None Remove="ClientApp\app\models\KudoCard.ts" />
+    <None Remove="ClientApp\app\models\LoggedinUserInformation.ts" />
+    <None Remove="ClientApp\app\models\MenuClass.ts" />
+    <None Remove="ClientApp\app\models\MenuHeader.ts" />
+    <None Remove="ClientApp\app\models\Methodology.ts" />
+    <None Remove="ClientApp\app\models\NavMenuView.ts" />
+    <None Remove="ClientApp\app\models\passwordreset.ts" />
+    <None Remove="ClientApp\app\models\RegisterRequest.ts" />
+    <None Remove="ClientApp\app\models\SaveExistingMember.ts" />
+    <None Remove="ClientApp\app\models\ScrumDevelopmentRole.ts" />
+    <None Remove="ClientApp\app\models\ScrumRole.ts" />
+    <None Remove="ClientApp\app\models\ScrumTeam.ts" />
+    <None Remove="ClientApp\app\models\ScrumTeamMember.ts" />
+    <None Remove="ClientApp\app\models\ScrumUser.ts" />
+    <None Remove="ClientApp\app\models\ScrumUserAllocationType.ts" />
+    <None Remove="ClientApp\app\models\ScrumUserInviteMember.ts" />
+    <None Remove="ClientApp\app\models\Sprint.ts" />
+    <None Remove="ClientApp\app\models\SprintDuration.ts" />
+    <None Remove="ClientApp\app\models\StakeHolder.ts" />
+    <None Remove="ClientApp\app\models\StrategicObject.ts" />
+    <None Remove="ClientApp\app\models\TokenModel.ts" />
+    <None Remove="ClientApp\app\models\UserForAssignAccess.ts" />
+    <None Remove="ClientApp\app\models\UserProfile.ts" />
+    <None Remove="ClientApp\app\models\VelocityProgressView.ts" />
+    <None Remove="ClientApp\app\models\WorkType.ts" />
+    <None Remove="ClientApp\app\services\accessRole\accessRole.service.ts" />
+    <None Remove="ClientApp\app\services\accessRole\assignAccess.service.ts" />
+    <None Remove="ClientApp\app\services\alert.service.ts" />
+    <None Remove="ClientApp\app\services\authentication.service.ts" />
+    <None Remove="ClientApp\app\services\clientcompany.service\clientcompany.service.ts" />
+    <None Remove="ClientApp\app\services\companyunit.service\companyunit.service.ts" />
+    <None Remove="ClientApp\app\services\companyunitsetup\companyunitsetup.service.ts" />
+    <None Remove="ClientApp\app\services\country.service\country.service.ts" />
+    <None Remove="ClientApp\app\services\crossTeamDependency\crossTeamDependency.service.ts" />
+    <None Remove="ClientApp\app\services\crossTeamDependency\external.service.ts" />
+    <None Remove="ClientApp\app\services\estimateSettingPlanningPoker\estimateSettingPlanningPoker.service.ts" />
+    <None Remove="ClientApp\app\services\feeds.service\feeds.service.ts" />
+    <None Remove="ClientApp\app\services\forgotpassword\forgotPassword.service.ts" />
+    <None Remove="ClientApp\app\services\happinessDoor.service\happinessdoor.service.ts" />
+    <None Remove="ClientApp\app\services\hub.factory.service.ts" />
+    <None Remove="ClientApp\app\services\kpi\velocityprogress\velocityprogress.service.ts" />
+    <None Remove="ClientApp\app\services\kudocard.service\kudocard.service.ts" />
+    <None Remove="ClientApp\app\services\naviagtion\navigation.service.ts" />
+    <None Remove="ClientApp\app\services\pagerservice.ts" />
+    <None Remove="ClientApp\app\services\passwordreset\passwordreset.service.ts" />
+    <None Remove="ClientApp\app\services\rerouteToSignin.ts" />
+    <None Remove="ClientApp\app\services\scrumTeam\scrumTeam.service.ts" />
+    <None Remove="ClientApp\app\services\scrumTeam\scrumTeamMember.service.ts" />
+    <None Remove="ClientApp\app\services\scrumTeam\stakeHolder.service.ts" />
+    <None Remove="ClientApp\app\services\setup\department.service.ts" />
+    <None Remove="ClientApp\app\services\setup\employmentType.service.ts" />
+    <None Remove="ClientApp\app\services\setup\form.service.ts" />
+    <None Remove="ClientApp\app\services\setup\menuDetail.service.ts" />
+    <None Remove="ClientApp\app\services\setup\menuHeader.service.ts" />
+    <None Remove="ClientApp\app\services\setup\methodology.service.ts" />
+    <None Remove="ClientApp\app\services\setup\scrumDevelopmentRole.service.ts" />
+    <None Remove="ClientApp\app\services\setup\scrumRole.service.ts" />
+    <None Remove="ClientApp\app\services\setup\scrumUserAllocationType.service.ts" />
+    <None Remove="ClientApp\app\services\setup\StrategicObject.service.ts" />
+    <None Remove="ClientApp\app\services\setup\workType.service.ts" />
+    <None Remove="ClientApp\app\services\sprintDuration\sprintDuration.service.ts" />
+    <None Remove="ClientApp\app\services\sprint\sprint.service.ts" />
+    <None Remove="ClientApp\app\services\tokenHelper.ts" />
+    <None Remove="ClientApp\app\services\user.service.ts" />
+    <None Remove="ClientApp\app\services\userprofile\userprofile.service.ts" />
+    <None Remove="polyfills.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\AppConfig.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\accessrole\accessRole.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\accessrole\assignAccess.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\accessrole\editRole.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\accessrole\userRoleList.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\account\register.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\account\signin.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\alert\alert.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\clientcompany\clientcompany.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\companyunit\companyunit.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\companyunitsetup\companyunitsetup.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\country\country.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\crossTeam\crossTeamDependency.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\crossTeam\dependencyGrid.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\feeds\feeds.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\forgotpassword\forgotpassword.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\forgotpassword\forgotpasswordmail.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\forgotpassword\forgotpasswordreset.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\forgotpassword\forgotpasswordresetsuccess.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\happinessdoor\happinessdoor.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\home\agilibo.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\invitemember\invitemember.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\kpi\velocityChart\velocitykpi.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\kpi\velocityChart\viewteam.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\kudocard\kudocardbox.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\kudocard\kudocardlist.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\kudocard\kudocard.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\pageVisitor\pagevisitor.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\passwordreset\passwordreset.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\playpocker\playpocker.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\pokerpointsetting\pokerpointsetting.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\poker\poker.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\policy\policy.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\scrummembers\addexisting.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\scrummembers\scrummember.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\scrumTeam\manageteam.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\scrumTeam\scrumteam.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\scrumTeam\teammanage.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\businessLine.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\department.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\employmentType.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\formsUnderSubMenu.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\fromsUnderFixedMenu.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\menuHeader.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\methodology.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\scrumdevrole.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\scrumRole.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\submenu.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\submenuMulti.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\Setup\workType.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\sprintSetting\sprintSetting.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\sprint\sprint.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\team\team.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\userprofile\userprofile.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\filters\dependencyFilter.pipe.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\AccessRole.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\BusinessLine.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\ClientCompany.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\Company.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\Country.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\CrossTeamDependency.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\Department.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\EmploymentType.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\EstimateSettingPlanningPoker.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\CompanyUnit.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\ImageMessage.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\KudoCard.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\LoggedinUserInformation.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\MenuClass.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\MenuHeader.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\Methodology.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\NavMenuView.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\PasswordReset.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\RegisterRequest.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\SaveExistingMember.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\ScrumDevelopmentRole.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\ScrumRole.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\ScrumTeam.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\ScrumTeamMember.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\ScrumUser.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\ScrumUserAllocationType.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\ScrumUserInviteMember.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\Sprint.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\SprintDuration.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\StakeHolder.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\StrategicObject.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\TokenModel.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\UserForAssignAccess.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\UserProfile.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\VelocityProgressView.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\WorkType.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\accessRole\accessRole.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\accessRole\assignAccess.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\alert.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\authentication.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\clientcompany.service\clientcompany.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\company.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\companyunit.service\companyunit.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\companyunitsetup\companyunitsetup.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\country.service\country.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\crossTeamDependency\crossTeamDependency.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\crossTeamDependency\external.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\estimateSettingPlanningPoker\estimateSettingPlanningPoker.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\feeds.service\feeds.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\forgotpassword\forgotPassword.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\happinessDoor.service\happinessdoor.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\hub.factory.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\kpi\velocityprogress\velocityprogress.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\kudocard.service\kudocard.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\naviagtion\navigation.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\pagerservice.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\passwordreset\passwordreset.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\rerouteToSignin.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\scrumTeam\scrumTeam.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\scrumTeam\scrumTeamMember.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\scrumTeam\stakeHolder.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\businessLine.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\department.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\employmentType.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\form.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\menuDetail.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\menuHeader.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\methodology.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\scrumDevelopmentRole.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\scrumRole.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\scrumUserAllocationType.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\strategicObject.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\setup\workType.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\sprintDuration\sprintDuration.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\sprint\sprint.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\tokenHelper.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\user.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\userprofile\userprofile.service.ts" />
+    <TypeScriptCompile Include="polyfills.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ClientApp\app\components\kudocard\assets\imgs\kudo_cards\main\congratulations.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ClientApp\app\components\kudocard\assets\imgs\kudo_cards\main\greatjob.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ClientApp\app\components\kudocard\assets\imgs\kudo_cards\main\manythanks.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ClientApp\app\components\kudocard\assets\imgs\kudo_cards\main\thankyou.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ClientApp\app\components\kudocard\assets\imgs\kudo_cards\main\totalawesome.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ClientApp\app\components\kudocard\assets\imgs\kudo_cards\main\veryhappy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ClientApp\app\components\kudocard\assets\imgs\kudo_cards\main\welldone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\app\components\happinessdoor\assets\Img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\terms.html" />
+  </ItemGroup>
+
+  <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+
+    <!-- In development, the dist files won't exist on the first run or when cloning to
+         a different machine, so rebuild them if not already present. -->
+    <Message Importance="high" Text="Performing first-run Webpack build..." />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec Command="npm install" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --env.prod" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="wwwroot\dist\**; ClientApp\dist\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

@@ -1,0 +1,73 @@
+﻿
+<ul class="nav nav-pills">
+
+    <li><a [routerLink]="['/planningpocker/', estimatemodel.teamKey,teamName]">Planning Poker</a></li>
+    <li class="active"> <a href="#">Settings</a></li>
+</ul>
+
+<div class="row" id="setting">
+    <div class="panel panel-default">
+        <div class="page-header"><h3 class="text-center">Planning Poker: {{teamName}}</h3></div>
+        <div class="panel-body">
+            <alert></alert>
+            <form [formGroup]="rForm" autocomplete="off" novalidate (ngSubmit)="submitForSave()">
+               
+                    <table class='table'>
+                        <thead>
+                            <tr><th>Label</th><th>Value</th><th></th><th></th><th></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+
+
+                                    <div class="form-group">
+                                        <input type="text" id="estimateLabel" placeholder="Label" class="form-control" formControlName="estimateLabel" [(ngModel)]="estimatemodel.estimateLabel" />                                       
+                                        <div style="font-size: 1em;color:red">
+                                            <em *ngIf="validateControl('estimateLabel') && checkError('estimateLabel', 'required')">Label is required</em>
+                                            <em *ngIf="validateControl('estimateLabel') && checkError('estimateLabel', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" id="estimateValue" placeholder="Value" class="form-control" formControlName="estimateValue" [(ngModel)]="estimatemodel.estimateValue" />
+                                        <div style="font-size: 1em;color:red">
+                                            <em *ngIf="validateControl('estimateValue') && checkError('estimateValue', 'required')">Value is required</em>
+                                            <em *ngIf="validateControl('estimateValue') && checkError('estimateValue', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><button [disabled]="!rForm.valid" class="btn btn-primary">Save</button></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </form>
+                <table class='table' *ngIf='estimateList && estimateList.length'>
+                    <thead>
+                        <tr><th>Label</th><th>Value</th><th></th><th></th><th></th></tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor='let item of estimateList'>
+                            <td>{{ item.estimateLabel }}</td>
+                            <td>{{ item.estimateValue }}</td>
+                            <td><button (click)="levelDown(item)" class="btn btn-primary" title="Down"><i class="glyphicon glyphicon-arrow-down"></i></button></td>
+                            <td><button (click)="levelUp(item)" class="btn btn-primary" title="Up"><i class="glyphicon glyphicon-arrow-up"></i></button></td>
+                            <td><button (click)="deleteEstimateSetting(item)" class="btn btn-primary" title="Delete"><i class="glyphicon glyphicon-erase"></i></button></td>
+                            <td><button (click)="updateEstimateSettings(item)" class="btn btn-primary" title="Edit"><i class="glyphicon glyphicon-edit"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+</div>
+        <div class="panel-footer">
+            <a [routerLink]="['/planningpocker/', groupKey,teamName]" class="btn btn-primary">Close</a>
+
+        </div>
+    </div>
+</div>
+

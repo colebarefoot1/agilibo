@@ -1,0 +1,67 @@
+﻿
+<div class="breadcrumb">
+
+    <h4>
+        <a [routerLink]="['/scrumteam']" class="thumbnail">
+            <span class='glyphicon glyphicon-cog'></span> Add New Team
+        </a>
+    </h4>
+
+</div>
+<div class="row">
+    <div class="col-md-6"><input type="text" placeholder="Team Name" class="form-control" [(ngModel)]="filter" name="filter" id="filter" /></div>
+    <div class="col-md-4">
+        <input type="button" (click)="search()" class="btn btn-success" value="Search" />
+        <button [disabled]="loading" (click)="getList()" class="btn btn-primary">Clear</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 table-responsive">
+        <h4>List of All Teams</h4>
+        <alert></alert>
+        <table class="table table-condensed table-bordered" *ngIf='myScrumteams && myScrumteams.length'>
+            <tr><th>Name</th><th>Department</th><th>Work Type</th><th>Methodology</th><th></th><th></th><th></th></tr>
+
+            <!--<tr *ngFor="let item of MyScrumteams | filter:filter;let i = index">-->
+            <tr *ngFor='let item of pagedItems'>
+                <td>{{ item.teamName }}</td>
+                <td>{{ item.department }}</td>
+                <td>{{ item.workType }}</td>
+                <td>{{ item.methodology }}</td>
+
+                <td>
+
+                    <a [routerLink]="['/manageTeam/', item.teamKey]">Activity</a>
+                </td>
+                <td>
+                    <a [routerLink]="['/addscrummember/', item.teamKey]">Manage Members</a>
+                </td>
+                <td> <a [routerLink]="" (click)="delete(item)">Remove</a></td>
+
+            </tr>
+
+        </table>
+        <alert></alert>
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(1)">First</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.currentPage + 1)">Next</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.totalPages)">Last</a>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+
+

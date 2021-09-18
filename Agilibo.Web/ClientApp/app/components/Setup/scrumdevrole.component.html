@@ -1,0 +1,41 @@
+﻿
+
+   
+    <div class="row">
+        <alert></alert>
+        <div class="col-md-6">
+            <form [formGroup]="scrumDevRoleForm" autocomplete="off" novalidate  (ngSubmit)="submit()">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h2 class="panel-title">Scrum Development Role Setup</h2></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="roleName">Development Role Name</label>
+                            <input type="text" class="form-control" formControlName="roleName" maxlength="20" [(ngModel)]="model.roleName" />
+                            <div style="font-size: 1.2em;color:red">
+                                <em *ngIf="validateControl('roleName') && hasError('roleName', 'required')">Role Name is required</em>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button [disabled]="!scrumDevRoleForm.valid" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
+            <table class='table' *ngIf='roles && roles.length'>
+                <thead>
+                    <tr><th>Name</th><th></th></tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let item of roles'>
+                        <td>{{ item.roleName }}</td>
+                        <td>
+                            <a [routerLink]="" (click)="edit(item)">Edit</a> |
+                            <a [routerLink]="" (click)="delete(item)">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      
+    </div>

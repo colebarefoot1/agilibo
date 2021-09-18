@@ -1,0 +1,95 @@
+﻿<div class="row">
+    <div class="col-md-6 manDiv">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <button class="btn btn-success" id="help-icon" data-toggle="modal" data-target="#helpModal">Help ?</button>
+                <div>
+                    <h2 class="panel-title paneltext">Happiness Door</h2>
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <form [formGroup]="HappyForm" autocomplete="off" novalidate>
+                    <div class="form-group">
+                        <button id="postButton" class="btn btn-primary" block round (click)="gotoHappinessPost()">Post a sticky note +</button><br />
+                        <div class="subcontent">
+                            <div class="list-group">
+                                <div class="list-group-item imgshow-title">
+                                    Happiness Door Faster feedback (Anonymous)
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkEvent" for="eventName">Check By Event</label>
+                                    <select id="eventName" formControlName="eventName" class="form-control" [(ngModel)]="model.eventName" (change)="getHappinessCardByEvent()">
+                                        <option value={{item.Name}} *ngFor="let item of eventName">
+                                                
+                                            {{item.Name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 list-group-item" *ngFor="let happinessFilter of happinessFilter">
+                                    <!--<div class="col-sm-12 list-group-item" *ngFor="let happiness of happinessFilter.happinessNote">-->
+                                    <div class="col-sm-3">
+                                        <img class="imgmain" [src]="happinessImage(happinessFilter.happinessPicture)">
+                                    </div>
+                                    <div class="col-sm-9 imgShow-info">
+                                        <br />
+                                        <div>{{happinessFilter.eventName}}</div>
+                                        <div>
+                                            &nbsp;&nbsp;{{happinessFilter.feedback}}
+                                        </div><br />
+                                              <div class="postdate">
+                                                  {{happinessFilter.created | date:'yyyy-MM-dd HH:mm:ss Z'}}
+                                              </div>
+                                    </div>
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="helpModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">How to create Happiness Card</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="">
+                                <div class="form-group" >
+                                    <article>
+                                        There are offices that measure the happiness of their employees and there are others who work to enhance the happiness of their
+                                        workers. These are not always the same ones. We know of some offices that measure happiness and job satisfaction via a highly
+                                        detailed monthly survey, while others ask it during the annual performance appraisal. Neither are successful for getting a pu lse on
+                                        their organization nor for appropriate <b>performance management</b>.<br/><br />
+                                        Taking from the <b>agile management</b>  practice of the Feedback Wall and mixing it with the Happiness Index, the Happiness Door brings
+                                        together team collaboration, employee engagement, and open and honest feedback. Like the Feedback Wall, the Happiness
+                                        Door really is often just Post-Its with feedback written on them, and, like the Happiness Index, it assumes that people can act as the
+                                        best gauge of their own happiness level.<br /><br />
+                                        At Management 3.0 events, our Happiness Door can be on any visible space where people give feedback in three groupings: things
+                                        that make attendees happy, things they feel neutral about and things they didn’t like. It can be as general as a thanks to as specific as
+                                        why or why not they didn’t like a certain exercise.<br /><br />
+                                        All feedback shared on the Happiness Door is anonymous yet publicly made. It can be about a certain topic or project – in which the
+                                        people who post first will inevitably affect others’ feedback – or it can be a long-term, ongoing feedback gathering. It’s often on a
+                                        door because it gives people to more freely post as they are entering or exiting, as well as it’s a place everyone passes regularly.
+                                        And it doesn’t have to be Post-Its or written at all. Some more creative companies we know take pics, cartoon or print emails from
+                                        clients. Get as creative as you want, so long as you encourage open and honest feedback.
+                                        Why not just make the Happiness Door about positive thoughts? Because collective happiness and collaboration comes from being
+                                        able to share the good, the bad, and the ugly. And how else could we all improve on things without specific feedback?
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

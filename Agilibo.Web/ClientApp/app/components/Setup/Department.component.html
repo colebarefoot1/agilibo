@@ -1,0 +1,46 @@
+﻿               
+            <div class="row">
+                <alert></alert>
+                <div class="col-md-6">
+                    <form [formGroup]="rForm" autocomplete="off" novalidate (ngSubmit)="submitDepartment(rForm.value)">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h2 class="panel-title">Department Setup</h2></div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="departmentName" class="control-label">Department name <span class="text-danger">**</span></label>
+                                    <input type="text" id="departmentName" class="form-control" formControlName="departmentName" [(ngModel)]="model.departmentName" />
+
+                                    <div style="font-size: 1.2em;color:red">
+                                        <em *ngIf="validateControl('departmentName') && checkError('departmentName', 'required')">Department Name is required</em>
+                                        <em *ngIf="validateControl('departmentName') && checkError('departmentName', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                                    </div>
+                                </div>
+                               
+                                <div class="panel-footer">
+                                    <button id="saveDepartMent" [disabled]="!rForm.valid" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div class="table-responsive">
+                        <table class='table' *ngIf='departmentList && departmentList.length'>
+                            <thead>
+                                <tr><th>Name</th><th></th></tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor='let item of departmentList'>
+                                    <td>{{ item.departmentName }}</td>
+                                    <td>
+                                        <a id="editDepartMent" [routerLink]="" (click)="edit(item)">Edit</a> |
+                                        <a id="deleteDepartMent" [routerLink]="" (click)="delete(item)">Delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-3">&nbsp;</div>
+
+
+            </div>

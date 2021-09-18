@@ -1,0 +1,153 @@
+﻿
+
+<div  *ngIf="loading" >
+    <img src="../../../../Theme/LoadingGifs/LoadingPlanningPoker2.gif" />
+</div>
+
+<ul class="nav nav-pills" *ngIf="!loading">
+    <li class="active"> <a href="#">Planning Poker </a></li>
+    <li><a [routerLink]="['/planningpokerpointsetting/', groupKey,teammodel.teamName]">Settings</a></li>
+
+</ul>
+<div class="row" id="ppk" *ngIf="!loading">
+    <alert></alert>
+    <div class="panel panel-default">
+        <!--<div class="page-header">
+            <h4 class="text-center">Planning Poker: {{teamName}}</h4>
+        </div>-->
+
+        <div class="panel-body">
+            <h4 class="text-center">Planning Poker Team Name : {{teamName}}</h4>
+            <div *ngIf="!group" class="form from-start">
+
+                <div class="form-group">
+                    <label>Scrum Team</label>
+                    <input type="text" class="form-control" name="teammodel.teamName" [(ngModel)]="teammodel.teamName" placeholder="Group">
+                </div>
+                <div class="form-group">
+                    <label>Member</label>
+                    <input type="email" class="form-control" name="email" [(ngModel)]="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <div class="pull-left"><button (click)="createOrJoin()" class="btn btn-primary">Join to Play Poker</button> </div>
+                </div>
+
+
+            </div>
+
+            <div *ngIf="group">
+
+                <div *ngIf="hubConnectionContextId != group.owner">
+                    <label for="sprintKey">Sprint Name</label>
+                    <select name="group.sprintKey" #group.sprintKey="ngModel" class="form-control" [(ngModel)]="group.sprintKey" (change)="selectName();">
+                        <option value="undefined">Please select Sprint</option>
+                        <option *ngFor="let item of group.sprintList" [ngValue]="item.sprintKey">
+                            {{item.sprintName}}
+                        </option>
+
+                    </select>
+                </div>
+
+                <div *ngIf="hubConnectionContextId == group.owner">
+                    <label for="sprintKey">Select Other Sprint</label>
+                    <select name="sprintKey" #sprintKey="ngModel" class="form-control" [(ngModel)]="model.sprintKey" (change)="selectNameFromWoner();">
+                        <option *ngFor="let item of group.sprintList"
+                                [ngValue]="item.sprintKey">
+                            {{item.sprintName}}
+                        </option>
+                    </select>
+                </div>
+
+                <div *ngIf="hubConnectionContextId == group.owner">
+                    <label for="sprintGoal">Sprint Name</label>
+                    <input type="text" class="form-control" name="group.sprintName" readonly [(ngModel)]="group.sprintName">
+                </div>
+
+
+
+
+                <div>
+                    <label for="sprintGoal">Sprint Goal</label>
+                    <input type="text" class="form-control" name="group.sprintGoal" readonly [(ngModel)]="group.sprintGoal">
+                </div>
+
+
+                <div>
+                    <label for="sprintOwnerName">Current owner of this game</label>
+                    <input type="text" class="form-control" name="group.sprintOwnerName" readonly [(ngModel)]="group.sprintOwnerName">
+                </div>
+
+                <!--<hr />-->
+
+                <div *ngIf="!group.groupMessage">
+                    <div>
+                        <label>User Story</label>
+                        <input type="text" #box class="form-control" name="groupMessage" [(ngModel)]="groupMessage" placeholder="Message">
+                        <br />
+                        <button [disabled]="!groupMessage" class='btn btn-primary' (click)='start()'>
+                            Start
+                        </button>
+                    </div>
+                </div>
+
+                <div *ngIf="group.groupMessage">
+                    <div>
+                        <label>User Story</label>
+                        <input type="text" class="form-control" name="group.groupMessage" readonly [(ngModel)]="group.groupMessage">
+
+                        <br />
+                        <button class='btn btn-primary' (click)='showAllVote()'>
+                            Show Vote
+                        </button>
+
+                        <button class='btn btn-primary' (click)='clearVote()'>
+                            Clear
+                        </button>
+
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    <div class="glass" *ngFor="let fibocard of group.fiboNakkiCards">
+                        <div class="col-md-2" style="padding-bottom:10px">
+                            <button (click)="fiboVote(fibocard.fiboValue)" class="btn btn-info">{{fibocard.fiboName}}</button>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+
+                    <div class="glass col-md-2" *ngFor="let glass of group.glasses">
+
+                        <div contenteditable="true" *ngIf="glass.hasVoted">
+                            <div contenteditable="false">
+                                <div>
+                                    <label>{{glass.emailName}}</label>
+                                </div>
+                                <!--<img [src]="getGravatarByEmail(glass.emailName)" alt="#" width="50" height="50" class="gravatar">-->
+                                <!--<img [src]="getProfileImage(glass.userKey)" alt="#" width="50" height="50" >-->
+                                <img [src]="glass.imageHeaders+glass.imageBinary" alt="#" width="55" height="60">
+                                <div *ngIf="glass.showVoted">{{glass.fiboVote}}</div>
+                            </div>
+
+                        </div>
+
+                        <div class="beer-container" *ngIf="!glass.hasVoted">
+                            <div>
+                                <label>{{glass.emailName}}</label>
+                            </div>
+                            <!--<img [src]="getGravatarByEmail(glass.emailName)" alt="#" width="44" height="44" class="gravatar">-->
+                            <!--<img [src]="getProfileImage(glass.userKey)" alt="#" width="44" height="44">-->
+                            <img [src]="glass.imageHeaders+glass.imageBinary" alt="#" width="50" height="55">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer" *ngIf="group">
+            <button (click)="close()" class="btn btn-primary">Leave</button>
+        </div>
+    </div>
+</div>

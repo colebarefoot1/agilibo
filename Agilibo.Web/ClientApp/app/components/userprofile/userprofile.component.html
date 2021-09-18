@@ -1,0 +1,179 @@
+﻿
+<div class="row">
+    <alert></alert>
+    <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2 class="panel-title">Update My Profile</h2></div>
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !firstName.valid }">
+                            <label for="firstName">First Name<span class="text-danger">**</span></label>
+                            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" maxlength="50" #firstName="ngModel" required />
+                            <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !lastName.valid }">
+                            <label for="lastName">Last Name <span class="text-danger">**</span></label>
+                            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" maxlength="50" #lastName="ngModel" required />
+                            <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="alias">Alias</label>
+                            <input type="text" class="form-control" name="alias" [(ngModel)]="model.alias" #username="ngModel" />
+
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" class="form-control" name="dob" [(ngModel)]="model.dob" #dob="ngModel" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobTitle">Job Title</label>
+                            <input type="text" class="form-control" name="jobTitle" maxlength="50" [(ngModel)]="model.jobTitle" #jobTitle="ngModel" />
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !employmentTypeKey.valid }">
+                            <label for="employmentTypeKey">Employment Type</label>
+                            <select name="employmentTypeKey" #employmentTypeKey="ngModel" class="form-control" [(ngModel)]="model.employmentTypeKey">
+                                <option value="undefined">Please select Employment Type</option>
+                                <option *ngFor="let item of employmenttypelist"
+                                        [ngValue]="item.employmentTypeKey">
+                                    {{item.employmentTypeName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="employmentLevel">Employment Level</label>
+                            <input type="number" class="form-control" name="employmentLevel" [(ngModel)]="model.employmentLevel" #employmentLevel="ngModel" />
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !scrumRoleKey.valid }">
+                            <label for="scrumRoleKey">Scrum Role</label>
+                            <select name="scrumRoleKey"
+                                    #scrumRoleKey="ngModel"
+                                    class="form-control" [(ngModel)]="model.scrumRoleKey">
+                                <option value="undefined">Please select Scrum Role</option>
+                                <option *ngFor="let item of scrumrolelist"
+                                        [ngValue]="item.scrumRoleKey">
+                                    {{item.roleName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !scrumDevelopemntRoleKey.valid }">
+                            <label for="scrumDevelopemntRoleKey">Scrum Development Role</label>
+                            <select name="scrumDevelopemntRoleKey"
+                                    #scrumDevelopemntRoleKey="ngModel"
+                                    class="form-control" [(ngModel)]="model.scrumDevelopemntRoleKey">
+                                <option value="undefined">Please select Development Role</option>
+                                <option *ngFor="let item of devrolelist"
+                                        [ngValue]="item.scrumDevelopemntRoleKey">
+                                    {{item.roleName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !companyKey.valid }">
+                            <label for="companyKey">Company</label>
+                            <select name="companyKey" (change)="getunitbycompany(model.companyKey)"
+                                    #companyKey="ngModel"
+                                    class="form-control" [(ngModel)]="model.companyKey">
+                                <option value="undefined">Please select Company</option>
+                                <option *ngFor="let item of companylist"
+                                        [ngValue]="item.companyKey">
+                                    {{item.companyName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !unitKey.valid }">
+                            <label for="unitKey">Company Unit</label>
+                            <select name="unitKey"
+                                    #unitKey="ngModel"
+                                    class="form-control" [(ngModel)]="model.unitKey">
+                                <option value="undefined">Please select Unit</option>
+                                <option *ngFor="let item of unitlist"
+                                        [ngValue]="item.unitKey">
+                                    {{item.unitName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !countryKey.valid }">
+                            <label for="countryKey">Country</label>
+                            <select name="countryKey"
+                                    #countryKey="ngModel"
+                                    class="form-control" [(ngModel)]="model.countryKey">
+                                <option value="undefined">Please select Country</option>
+                                <option *ngFor="let item of countrylist"
+                                        [ngValue]="item.countryKey">
+                                    {{item.countryName}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !departmentKey.valid }">
+                            <label for="departmentKey">Department</label>
+                            <select name="departmentKey"
+                                    #departmentKey="ngModel"
+                                    class="form-control" [(ngModel)]="model.departmentKey">
+                                <option value="undefined">Please select Department</option>
+                                <option *ngFor="let item of departmentlist"
+                                        [ngValue]="item.departmentKey">
+                                    {{item.departmentName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="skypeID">Skype ID</label>
+                            <input type="text" class="form-control" name="skypeID" maxlength="80" [(ngModel)]="model.skypeID" #skypeID="ngModel" />
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNo">Phone No</label>
+                            <input type="tel" class="form-control" name="phoneNo" maxlength="80" [(ngModel)]="model.phoneNo" #phoneNo="ngModel" />
+                            <div *ngIf="f.submitted && phoneNo.errors?.tel" class="help-block">Phone # Format is Invalid</div>
+
+
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+                            <label for="email">Email <span class="text-danger">**</span></label>
+                            <input type="email" class="form-control" name="email" maxlength="50" [(ngModel)]="model.email" #email="ngModel" [email]="model.email !==''" required />
+
+                            <div *ngIf="f.submitted && email.errors?.required" class="help-block">Email is required</div>
+                            <div *ngIf="f.submitted && email.errors?.email" class="help-block">Email Format is Invalid</div>
+                        </div>
+                        <!--<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                            <label for="password">Password <span class="text-danger">**</span></label>
+                            <input type="password" class="form-control" name="password" maxlength="10" [(ngModel)]="model.password" #password="ngModel" required />
+                            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !confirmpassword.valid}">
+                            <label for="confirmpassword">Confirm Password <span class="text-danger">**</span></label>
+                            <input type="password" class="form-control" name="confirmpassword" [(ngModel)]="model.confirmpassword" #confirmpassword="ngModel" required />
+                            <div *ngIf="f.submitted && !confirmpassword.valid" class="help-block">Confirm Password is required</div>
+                            <div *ngIf="checkConfirmpassword(model.confirmpassword,model.password)" class="help-block"><span class="text-danger">Confirm Password is not the same as Password</span></div>
+                        </div>-->
+                        <div class="form-group">
+                            <label for="photo">Profile Picture </label><br />
+                            <img id="profileImage" [src]="images.imageHeaders + images.imageBinary" style="width:150px;height:200px;" /><br /><br />
+                            <input id="inputImage" class="form-control" #Image accept="image/*" (change)="handleFileInput($event.target.files)" type="file" /><br />
+                            <button id="addImage" class="btn" (click)="addFile()">Add Image</button>
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="panel-footer">
+                    <alert></alert>
+                    <button id="saveProfile" [disabled]="loading" (click)="Submit()" class="btn btn-primary">Save</button>
+                    <input id="resetPass" type="button" value="Password Reset" [routerLink]="['/passwordreset']" class="btn">
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+
+</div>

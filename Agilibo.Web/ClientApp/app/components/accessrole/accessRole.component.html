@@ -1,0 +1,91 @@
+﻿<div *ngIf="loading">
+   
+    <img src="../../../../Theme/LoadingGifs/LoadingPlanningPoker.gif" height="400px" class="center-block" />
+</div>
+<div *ngIf="!loading">
+
+    <form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <alert></alert>
+                <div class="panel panel-info">
+                    <div class="panel-heading"><h3>Define Access Role</h3></div>
+                    <div class="panel-body">
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !roleName.valid }">
+                            <label for="roleName">Role Name</label>
+                            <input type="text" class="form-control" name="roleName" [(ngModel)]="model.roleName" #roleName="ngModel" required />
+                            <div *ngIf="f.submitted && !roleName.valid" class="help-block">Role is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Please Select Access</div>
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div *ngFor='let mitem of mainmenu' class="col-md-4">
+                                <h4>
+                                    {{mitem.menuName}}
+                                </h4>
+                                <div *ngFor='let x of filterforms(mitem.menuKey,0)'>
+                                    <label> <input type="checkbox" [(ngModel)]="x.selected" #selected="ngModel" [ngModelOptions]="{standalone: true}" data-checklist-model="user.roles" (change)="addRole($event,x)" data-checklist-value="x.detailKey"> {{x.title}}</label>
+                                </div>
+                                <div *ngFor='let s1 of filtersubmenu(mitem.menuKey,1)'>
+                                    <h5><b>>> </b>{{s1.menuName}}</h5><br />
+                                    <div *ngFor='let x1 of filterforms(s1.submenuKey,1)'>
+                                        <label *ngIf="x1.menuKey==s1.submenuKey && x1.descendLevel==1"> <input type="checkbox" [(ngModel)]="x1.selected" #selected="ngModel" [ngModelOptions]="{standalone: true}" data-checklist-model="user.roles" (change)="addRole($event,x1)" data-checklist-value="x1.detailKey"> {{x1.title}}</label>
+                                    </div>
+                                    <!--////////////Level 3///////////////-->
+                                    <div *ngFor='let s2 of filtersubmenu(s1.submenuKey,2)'>
+                                        <h5> <b>>> </b>{{s2.menuName}}</h5><br />
+                                        <div *ngFor='let x2 of filterforms(s2.submenuKey,2)'>
+                                            <label> <input type="checkbox" [(ngModel)]="x2.selected" #selected="ngModel" [ngModelOptions]="{standalone: true}" data-checklist-model="user.roles" (change)="addRole($event,x2)" data-checklist-value="x2.detailKey"> {{x2.title}}</label>
+                                        </div>
+                                        <!--////////////Level 4///////////////-->
+                                        <div *ngFor='let s3 of filtersubmenu(s2.submenuKey,3)'>
+                                            <h5><b>>> </b>{{s3.menuName}}</h5><br />
+                                            <div *ngFor='let x3 of filterforms(s3.submenuKey,3)'>
+                                                <label> <input type="checkbox" [(ngModel)]="x3.selected" #selected="ngModel" [ngModelOptions]="{standalone: true}" data-checklist-model="user.roles" (change)="addRole($event,x3)" data-checklist-value="x3.detailKey"> {{x3.title}}</label>
+                                            </div>
+                                            <!--////////////Level 5///////////////-->
+                                            <div *ngFor='let s4 of filtersubmenu(s3.submenuKey,4)'>
+                                                <h5><b>>> </b>{{s4.menuName}}</h5><br />
+                                                <div *ngFor='let x4 of filterforms(s4.submenuKey,4)'>
+                                                    <label> <input type="checkbox" [(ngModel)]="x4.selected" #selected="ngModel" [ngModelOptions]="{standalone: true}" data-checklist-model="user.roles" (change)="addRole($event,x4)" data-checklist-value="x4.detailKey"> {{x4.title}}</label>
+                                                </div>
+                                            </div>
+                                            <!--//////End of Level 5///////////-->
+                                        </div>
+                                        <!--//////End of Level 4///////////-->
+                                    </div>
+                                    <!--//////End of Level 3///////////-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel-footer">
+                        <input type="checkbox" name="selectCheck" (change)="selectAll($event)" /><label>Select All</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <alert></alert>
+                    </div>
+                    <div class="panel-footer">
+                        <button [disabled]="loading" class="btn btn-primary">Save</button> ||
+                        <a [routerLink]="['/userrolelist/']">Go Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

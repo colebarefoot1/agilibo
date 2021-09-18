@@ -1,0 +1,134 @@
+﻿﻿
+<div *ngIf="loading">
+    <img src="../../../../Theme/LoadingGifs/LoadingPlanningPoker.gif" height="400px" class="center-block" />
+</div>
+<div *ngIf="!loading">
+    <form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
+        <div class="row">
+            <div class="col-md-12">
+                <alert></alert>
+                <div class="panel panel-info">
+                    <div class="panel-heading"><h3>Edit Access Role</h3></div>
+                    <div class="panel-body">
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !roleName.valid }">
+                            <label for="roleName">Role Name</label>
+                            <input type="text" class="form-control" name="roleName" [(ngModel)]="model.roleName" #roleName="ngModel" required />
+                            <input type="hidden" class="form-control" name="roleKey" [(ngModel)]="model.roleKey" #roleKey="ngModel" required />
+                            <div *ngIf="f.submitted && !roleName.valid" class="help-block">Role is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Please Select Access</div>
+                    <div class="panel-body">
+                        <alert></alert>
+                        <div *ngFor='let mitem of menudetail' class="row">
+                            <h4>
+                                {{mitem.menuName}}
+                            </h4>
+                            <div *ngFor='let x of filterforms(mitem.menuKey,0)'>
+                                <label> <input type="checkbox" [(ngModel)]="x.selected" #selected="ngModel" [ngModelOptions]="{standalone: true}" data-checklist-model="user.roles" (change)="addRole($event,x)" data-checklist-value="x.detailKey"> {{x.title}}</label>
+                            </div>
+                            <div *ngFor='let s1 of filtersubmenu(mitem.menuKey,1)'>
+                                <h5><b>>> </b>{{s1.menuName}}</h5><br />
+                                <div *ngFor='let x1 of filterforms(s1.submenuKey,1)'>
+                                    <label *ngIf="x1.menuKey==s1.submenuKey && x1.descendLevel==1"> <input type="checkbox" [(ngModel)]="x1.selected" #selected="ngModel" [ngModelOptions]="{standalone: true}" data-checklist-model="user.roles" (change)="addRole($event,x1)" data-checklist-value="x1.detailKey"> {{x1.title}}</label>
+                                </div>
+                                <!--////////////Level 3///////////////-->
+                                <div *ngFor='let s2 of filtersubmenu(s1.submenuKey,2)'>
+                                    <h5> <b>>> </b>{{s2.menuName}}</h5><br />
+                                    <div *ngFor='let x2 of filterforms(s2.submenuKey,2)'>
+                                        <label> <input type="checkbox" [(ngModel)]="x2.selected" #selected="ngModel" [ngModelOptions]="{standalone: true}" data-checklist-model="user.roles" (change)="addRole($event,x2)" data-checklist-value="x2.detailKey"> {{x2.title}}</label>
+                                    </div>
+                                    <!--////////////Level 4///////////////-->
+                                    <div *ngFor='let s3 of filtersubmenu(s2.submenuKey,3)'>
+                                        <h5><b>>> </b>{{s3.menuName}}</h5><br />
+                                        <div *ngFor='let x3 of filterforms(s3.submenuKey,3)'>
+                                            <label> <input type="checkbox" [(ngModel)]="x3.selected" #selected="ngModel" [ngModelOptions]="{standalone: true}" data-checklist-model="user.roles" (change)="addRole($event,x3)" data-checklist-value="x3.detailKey"> {{x3.title}}</label>
+                                        </div>
+                                        <!--////////////Level 5///////////////-->
+                                        <div *ngFor='let s4 of filtersubmenu(s3.submenuKey,4)'>
+                                            <h5><b>>> </b>{{s4.menuName}}</h5><br />
+                                            <div *ngFor='let x4 of filterforms(s4.submenuKey,4)'>
+                                                <label> <input type="checkbox" [(ngModel)]="x4.selected" #selected="ngModel" [ngModelOptions]="{standalone: true}" data-checklist-model="user.roles" (change)="addRole($event,x4)" data-checklist-value="x4.detailKey"> {{x4.title}}</label>
+                                            </div>
+                                        </div>
+                                        <!--//////End of Level 5///////////-->
+                                    </div>
+                                    <!--//////End of Level 4///////////-->
+                                </div>
+                                <!--//////End of Level 3///////////-->
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <input type="checkbox" name="selectCheck" (change)="selectAll($event)" /><label>Select All</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Existing Access</div>
+                    <div class="panel-body">
+                        <alert></alert>
+                        <div *ngFor='let mitem of filterMainR()' class="row">
+                            <h4>
+                                {{mitem.title}} <a [routerLink]="" (click)="deleteMain(mitem)">X</a>
+                            </h4>
+                            <hr />
+                            <div *ngFor='let x of filterformsR(mitem.menuKey, 0)'>
+                                <b>>></b> <label> {{x.title}}</label> <a [routerLink]="" (click)="delete(x)">X</a>
+                            </div>
+                            <div *ngFor='let m1 of filtersubmenuR(mitem.menuKey, 1)'>
+                                <h5>
+                                    {{m1.title}} <a [routerLink]="" (click)="deleteMain(m1)">X</a>
+                                </h5>
+                                <hr />
+                                <div *ngFor='let x1 of filterformsR(m1.menuKey, 1)'>
+                                    <b>>></b> <label> {{x1.title}}</label> <a [routerLink]="" (click)="delete(x1)">X</a>
+                                </div>
+                                <div *ngFor='let m2 of filtersubmenuR(m1.menuKey, 2)'>
+                                    <h5>
+                                        {{m2.title}} <a [routerLink]="" (click)="deleteMain(m2)">X</a>
+                                    </h5>
+                                    <hr />
+                                    <div *ngFor='let x2 of filterformsR(m2.menuKey, 2)'>
+                                        <b>>></b> <label> {{x2.title}}</label><a [routerLink]="" (click)="delete(x2)">X</a>
+                                    </div>
+                                    <div *ngFor='let m3 of filtersubmenuR(m2.menuKey, 3)'>
+                                        <h5>
+                                            {{m3.title}} <a [routerLink]="" (click)="deleteMain(m3)">X</a>
+                                        </h5>
+                                        <hr />
+                                        <div *ngFor='let x3 of filterformsR(m3.menuKey, 3)'>
+                                            <b>>></b><label> {{x3.title}}</label> <a [routerLink]="" (click)="delete(x3)">X</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <alert></alert>
+                    </div>
+                    <div class="panel-footer">
+                        <button [disabled]="loading" class="btn btn-primary">Update</button> ||
+                        <a [routerLink]="['/userrolelist/']">Go Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

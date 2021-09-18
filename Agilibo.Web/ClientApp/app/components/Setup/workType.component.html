@@ -1,0 +1,53 @@
+﻿
+          
+<div class="row">
+    <alert></alert>
+    <div class="col-md-6">
+        <form [formGroup]="workTypeForm" autocomplete="off" novalidate (ngSubmit)="submitWorkType()">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2 class="panel-title">Worktype Setup</h2></div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label for="workTypeName">Work Type</label>
+                        <input type="text" id="workTypeName" class="form-control" formControlName="workTypeName" [(ngModel)]="model.workTypeName" />
+                        <div style="font-size: 1.2em;color:red">
+                            <em *ngIf="validateControl('workTypeName') && checkError('workTypeName', 'required')">WorkType Name is required</em>
+                            <em *ngIf="validateControl('workTypeName') && checkError('workTypeName', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <button [disabled]="!workTypeForm.valid" class="btn btn-primary">Save</button>
+
+                </div>
+            </div>
+
+        </form>
+
+        <table class='table' *ngIf='workTypeList && workTypeList.length'>
+            <thead>
+                <tr>
+
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let Item of workTypeList'>
+                    <td>{{ Item.workTypeName }}</td>
+
+                    <td>
+                        <a [routerLink]="" (click)="edit(Item)">Edit</a> |
+                        <a [routerLink]="" (click)="delete(Item)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>

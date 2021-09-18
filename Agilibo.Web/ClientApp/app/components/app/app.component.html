@@ -1,0 +1,36 @@
+<div class='container-fluid appbodyheight appcontainer'>
+    <div class='row'>
+        <div class='col-sm-2 nav-menu {{_showMenu ? "show-menu" : "hide-menu" }}'>
+            <nav-menu></nav-menu>
+        </div>
+        <div class='body-content {{_showMenu ? "col-md-10" : "col-md-12" }}'>
+            <div>
+                <div class='breadcrumb' *ngIf="showheader()">
+
+                    <img src="../../../../Theme/img/Agilibo.png" height="30px" class="pull-right" />
+                    <label>{{currentUser.firstName}} {{currentUser.lastName}}</label>
+                    <span class="small">
+                        <label>Company ID :</label> {{currentUser.companyKey}}  <label>Unit ID:</label>
+                        {{currentUser.unitKey}} <label>Team Name: </label> {{currentUser.defaultTeam}}
+                    </span><br />
+                           <span class="small">
+                               <label>Current Sprint :  </label> {{currentUser.sprintName}}
+                           </span>
+                    <span class="small">
+                        <label> From : </label> {{currentUser.sprintFrom | date :  "dd.MM.yyyy"}}  <label> To : </label> {{currentUser.sprintTo | date :  "dd.MM.yyyy"}} 
+                    </span><br />
+                    <span class="small">
+                        <label>Sprint Goal : </label> {{currentUser.sprintGoal}}
+                    </span><br />
+                </div>
+                <div class='openmenu-{{getRouter()}}'>
+                    <img (click)="showMenu()" class="show-nav-menu" tooltip="Show Menu" tooltipPlacement="bottom" src="../../../../Theme/img/menu-open.png" />
+                </div>
+            </div>
+            <router-outlet>
+            </router-outlet>
+        </div>
+    </div>
+
+   
+</div>

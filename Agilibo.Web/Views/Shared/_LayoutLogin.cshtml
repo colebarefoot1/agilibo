@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Enabling High Performance Agile Teams</title>
+    <base href="~/" />
+
+    <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+    <style type="text/css">
+
+
+
+        .bodyfooter {
+            text-align: center;
+            height: 30px; /* Height of the footer */
+            left: 0;
+            right: 0;
+            color: #ffffff;
+            width: 100%;
+            background: #000000;
+            position: fixed;
+        }
+
+        body {
+            margin: 0;
+            height: 100%;
+        }
+
+        .container {
+            min-height: 100%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+    </style>
+</head>
+
+<body class="container">
+
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <a [routerLink]="['/home']"> <h2 class="text-info">AGILIBO</h2></a>
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    @RenderBody()
+
+    @RenderSection("scripts", required: false)
+
+
+
+
+
+    <!-- -->
+    <!-- -->
+    <!-- -->
+    <!-- -->
+    <!-- -->
+
+
+
+    <footer class="bodyfooter">
+        &copy; @System.DateTime.Now.Year - Archibo Inh. Ziad Iqbal TESTING TESTING
+    </footer>
+</body>
+
+
+</html>

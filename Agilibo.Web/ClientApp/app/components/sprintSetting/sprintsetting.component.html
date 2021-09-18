@@ -1,0 +1,32 @@
+﻿
+
+<div class="row">
+    <div class="col-md-10 table-responsive">
+        <h4>Sprint Settings</h4>
+        <alert></alert>
+        <table class="table table-condensed table-bordered" *ngIf='myScrumteams && myScrumteams.length'>
+            <tr><th>Name</th><th>Department</th><th>Work Type</th><th>Methodology</th><th></th></tr>
+
+           
+            <tr *ngFor='let item of myScrumteams'>
+                <td>{{ item.teamName }}</td>
+                <td>{{ item.department }}</td>
+                <td>{{ item.workType }}</td>
+                <td>{{ item.methodology }}</td>
+
+                <td>
+                  <a [routerLink]="['/sprint/', item.teamKey,item.teamName]">Sprint</a>
+                  
+                </td>
+               
+
+            </tr>
+
+        </table>
+        <alert></alert>
+    </div>
+
+
+</div>
+
+

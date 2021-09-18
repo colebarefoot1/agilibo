@@ -1,0 +1,73 @@
+﻿<div class="row">
+    <div class="col-md-6 manDiv">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div>
+                    <h2 class="panel-title paneltext">Happiness Door</h2>
+                </div>
+
+            </div>
+            <form [formGroup]="HappinessForm" autocomplete="off" novalidate (ngSubmit)="postHappinessDoor()">
+                <div class="panel-body">
+                    <div class="panel-title" id="title">
+                        Which picture shows how you are feeling now?
+                    </div>
+                    <div class="">
+                        <div class="radio-inline">
+                            <div class="col-md-4">
+                                <div class="imgDiv">
+                                    <div class="thumbnail" id="img-happiness">
+                                        <input class="radio" type="radio" value="happy" formControlName="happiness" [(ngModel)]="happiness">
+                                        <img id="happyImg" src="assets/img/happy.png">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="imgDiv">
+                                    <div class="thumbnail" id="img-happiness">
+                                        <input class="no-maring" type="radio" value="good" formControlName="happiness" [(ngModel)]="happiness">
+                                        <img id="goodImg" src="assets/img/good.png">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="imgDiv" no-lines no-padding>
+                                    <div class="thumbnail" id="img-happiness">
+                                        <input class="no-maring" type="radio" value="bad" formControlName="happiness" [(ngModel)]="happiness">
+                                        <img id="badImg" src="assets/img/bad.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="title">
+                            Tell something:
+                        </label>
+                        <div class="item">
+                            <textarea class="customtextarea" type="text" formControlName="feedback" overflow-scroll="true" placeholder="Enter Feedback" [(ngModel)]="model.feedback"></textarea>
+                        </div>
+                        <div style="font-size: 1.2em;color:red">
+                            <em class="feedBackReq" *ngIf="validateControl('feedback') && checkError('feedback', 'required')">feedback is required</em>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventName">Event : (optional)</label>
+                        <select formControlName="eventName" class="form-control" [(ngModel)]="model.eventName">
+                            <option value="undefined">Please select event</option>
+                            <option *ngFor="let item of events"
+                                    [ngValue]="item.Name">
+                                {{item.Name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="panel-footer">
+                        <button [disabled]="!HappinessForm.valid" class="btn btn-primary" id="postButton">Post it</button>
+                    </div>
+                    <p class="alert-info" id="footer-note">Will be posted as anonymous.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

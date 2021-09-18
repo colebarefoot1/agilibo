@@ -1,0 +1,22 @@
+﻿<div class="row manDiv">
+	<div class="col-md-10">
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+				<h2 class="panel-title paneltext">Kudo Cards</h2></div>
+				<div class="panel-body">
+					<alert></alert>
+					<div class="form-group">
+						<label class="kudolebel" for="img">  Please select a Kudo Card : </label><br/>
+
+						<div class="kudoimage" *ngFor="let kudo of cardsList" (click)="gotoKudoPost(kudo)">
+							<img name="{{kudo.title}}"  [src]="kudoImagePath(kudo.img)">
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+	</div>
+</div>

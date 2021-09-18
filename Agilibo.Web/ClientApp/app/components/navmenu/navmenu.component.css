@@ -1,0 +1,143 @@
+li .glyphicon {
+    margin-right: 10px;
+}
+li {
+    cursor: pointer;
+}
+/* Highlighting rules for nav menu items */
+li.link-active a,
+li.link-active a:hover,
+li.link-active a:focus {
+    background-color: #4189C7;
+    color: white;
+}
+
+/* Keep the nav menu independent of scrolling and on top of other items */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+}
+
+@media (min-width: 768px) {
+    /* On small screens, convert the nav menu to a vertical sidebar */
+    .main-nav {
+        height: 100%;
+        width: calc(20% - 20px);
+    }
+    .navbar {
+        border-radius: 0px;
+        border-width: 0px;
+        height: 100%;
+    }
+    .navbar-header {
+        float: none;
+    }
+    .navbar-collapse {
+        border-top: 1px solid #444;
+        padding: 0px;
+    }
+    .navbar ul {
+        float: none;
+    }
+    .navbar li {
+        float: none;
+        font-size: 15px;
+        margin: 6px;
+    }
+    .navbar li a {
+        padding: 10px 16px;
+        border-radius: 4px;
+    }
+    .navbar a {
+        /* If a menu item's text is too long, truncate it */
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+
+/* Notification style*/
+
+#snackbar {
+    visibility: visible;
+    min-width: 250px;
+    margin-left: -390px;
+    margin-bottom: 15px;
+    background-color: #FF6347;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 15px;
+    -moz-box-shadow: 5px 5px 7px rgba(33,33,33,1);
+    -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    -moz-transition: -moz-transform .15s linear;
+    -o-transition: -o-transform .15s linear;
+    -webkit-transition: -webkit-transform .15s linear;
+}
+.customBookmark {
+    opacity: 0.2;
+    border-radius: 10px;
+    border: hidden;
+}
+.customBookmark:hover {
+    opacity: 0.8;
+}
+.dropdown-submenu {
+    position: relative;
+}
+
+    .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu > a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover > a:after {
+        border-left-color: #fff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+        .dropdown-submenu.pull-left > .dropdown-menu {
+            left: -100%;
+            margin-left: 10px;
+            -webkit-border-radius: 6px 0 6px 6px;
+            -moz-border-radius: 6px 0 6px 6px;
+            border-radius: 6px 0 6px 6px;
+        }

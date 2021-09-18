@@ -1,0 +1,156 @@
+﻿<div class="breadcrumb">
+
+    <a [routerLink]="['/crossTeamDependency/']">Report Dependency</a>
+    <a [routerLink]="['/dependencyGrid']" class="btn btn-link"> Dependency Grid</a>
+</div>
+
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2 class="panel-title">Dependency Grid</h2></div>
+        <div class="panel-body">
+            <alert></alert>
+            <div class="col-md-10">
+                <div class="table-responsive">
+                    <table class='table table-bordered' *ngIf='gridlist && gridlist.length'>
+                        <thead>
+                            <tr><th>Team Name</th><th>Current Sprint</th><th>Sprint 1+</th><th>Sprint 2+</th><th></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let itemMain of gridlist'>
+                                <td>{{ itemMain.teamName }}</td>
+                                <td>
+                                    <div *ngFor='let itemStory of itemMain.current' class="cell-wrapper">
+                                        <div class="flex-container">
+                                            <div class="main">
+                                                <div class="v-num-wrapper">
+                                                    <div class="v-num" id="us{{itemStory.virtualnumber}}">
+                                                        <div class="num">{{itemStory.virtualnumber}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="u-name">{{itemStory.userStoryName}}</div>
+                                            </div>
+                                            <div class="arrow-container">
+                                                <div *ngFor='let dependency of itemStory.dependencyDetailForCurrent | dependencyVerticalfilter' class="a-wrapper" title="{{dependency.userStory}}" (click)="scrollToVirtualNumber(dependency.virtualnumber)">
+                                                    <span class="arrow t{{dependency.dependencyType}} d{{dependency.direction}}">▲</span>
+                                                    <span class="v-val d{{dependency.direction}}">{{dependency.virtualnumber}} </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-container h-num-wrapper">
+                                            <div *ngFor='let dependency of itemStory.dependencyDetailForCurrent | dependencyHorizontalfilter' class="a-wrapper" title="{{dependency.userStory}}" (click)="scrollToVirtualNumber(dependency.virtualnumber)">
+                                                <span class="arrow t{{dependency.dependencyType}} d{{dependency.direction}}">▲</span>
+                                                <span class="v-val d{{dependency.direction}}">{{dependency.virtualnumber}} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div *ngFor='let itemStory of itemMain.plusOne' class="cell-wrapper">
+                                        <div class="flex-container">
+                                            <div class="main">
+                                                <div class="v-num-wrapper">
+                                                    <div class="v-num" id="us{{itemStory.virtualnumber}}">
+                                                        <div class="num">{{itemStory.virtualnumber}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="u-name">{{itemStory.userStoryName}}</div>
+                                            </div>
+                                            <div class="arrow-container">
+                                                <div *ngFor='let dependency of itemStory.dependencyDetailForCurrent | dependencyVerticalfilter' class="a-wrapper" title="{{dependency.userStory}}" (click)="scrollToVirtualNumber(dependency.virtualnumber)">
+                                                    <span class="arrow t{{dependency.dependencyType}} d{{dependency.direction}}">▲</span>
+                                                    <span class="v-val d{{dependency.direction}}">{{dependency.virtualnumber}} </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-container h-num-wrapper">
+                                            <div *ngFor='let dependency of itemStory.dependencyDetailForCurrent | dependencyHorizontalfilter' class="a-wrapper" title="{{dependency.userStory}}" (click)="scrollToVirtualNumber(dependency.virtualnumber)">
+                                                <span class="arrow t{{dependency.dependencyType}} d{{dependency.direction}}">▲</span>
+                                                <span class="v-val d{{dependency.direction}}">{{dependency.virtualnumber}} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div *ngFor='let itemStory of itemMain.plusTwo' class="cell-wrapper">
+                                        <div class="flex-container">
+                                            <div class="main">
+                                                <div class="v-num-wrapper">
+                                                    <div class="v-num" id="us{{itemStory.virtualnumber}}">
+                                                        <div class="num">{{itemStory.virtualnumber}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="u-name">{{itemStory.userStoryName}}</div>
+                                            </div>
+                                            <div class="arrow-container">
+                                                <div *ngFor='let dependency of itemStory.dependencyDetailForCurrent | dependencyVerticalfilter' class="a-wrapper" title="{{dependency.userStory}}" (click)="scrollToVirtualNumber(dependency.virtualnumber)">
+                                                    <span class="arrow t{{dependency.dependencyType}} d{{dependency.direction}}">▲</span>
+                                                    <span class="v-val d{{dependency.direction}}">{{dependency.virtualnumber}} </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-container h-num-wrapper">
+                                            <div *ngFor='let dependency of itemStory.dependencyDetailForCurrent | dependencyHorizontalfilter' class="a-wrapper" title="{{dependency.userStory}}" (click)="scrollToVirtualNumber(dependency.virtualnumber)">
+                                                <span class="arrow t{{dependency.dependencyType}} d{{dependency.direction}}">▲</span>
+                                                <span class="v-val d{{dependency.direction}}">{{dependency.virtualnumber}} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div *ngFor='let itemStory of itemMain.referrel' class="cell-wrapper">
+                                        <div class="flex-container">
+                                            <div class="main">
+                                                <div class="v-num-wrapper">
+                                                    <div class="v-num" id="us{{itemStory.virtualnumber}}">
+                                                        <div class="num">{{itemStory.virtualnumber}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="u-name">{{itemStory.userStoryName}}</div>
+                                            </div>
+                                            <div class="arrow-container">
+                                                <div *ngFor='let dependency of itemStory.dependencyDetailForCurrent | dependencyVerticalfilter' class="a-wrapper" title="{{dependency.userStory}}" (click)="scrollToVirtualNumber(dependency.virtualnumber)">
+                                                    <span class="arrow t{{dependency.dependencyType}} d{{dependency.direction}}">▲</span>
+                                                    <span class="v-val d{{dependency.direction}}">{{dependency.virtualnumber}} </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-container h-num-wrapper">
+                                            <div *ngFor='let dependency of itemStory.dependencyDetailForCurrent | dependencyHorizontalfilter' class="a-wrapper" title="{{dependency.userStory}}" (click)="scrollToVirtualNumber(dependency.virtualnumber)">
+                                                <span class="arrow t{{dependency.dependencyType}} d{{dependency.direction}}">▲</span>
+                                                <span class="v-val d{{dependency.direction}}">{{dependency.virtualnumber}} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-2 legend">
+    <h5>Type of Dependency</h5>
+    <table class='table table-bordered'>
+        <tbody>
+            <tr><td class="people">People</td></tr>
+            <tr><td class="technology">Technology</td></tr>
+            <tr><td class="domain">Domain</td></tr>
+            <tr><td class="software">Software</td></tr>
+            <tr><td class="external">External</td></tr>
+        </tbody>
+    </table>
+    <h5>Direction</h5>
+    <table class='table table-bordered'>
+        <tbody>
+            <tr><td><span class="arrow d1 legend-arrow">▲</span>Dependency within the same team but different sprint</td></tr>
+            <tr><td><span class="arrow d2 legend-arrow">▲</span>Dependency on different team different sprint</td></tr>
+            <tr><td><span class="arrow d3 legend-arrow">▲</span>Sames sprint but different team</td></tr>
+            <tr><td><span class="arrow d4 legend-arrow">▲</span>External on a different sprint</td></tr>
+            <tr><td><span class="arrow d5 legend-arrow">▲</span>External on the same sprint</td></tr>
+        </tbody>
+    </table>
+</div>
+

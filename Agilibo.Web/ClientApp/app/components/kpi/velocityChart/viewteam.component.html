@@ -1,0 +1,22 @@
+﻿
+<div class="row">
+    <alert></alert>
+    <div class="col-md-10 table-responsive">
+        <h4>List of All Teams (Select to view Velocity Progress)</h4>
+
+        <table class="table table-condensed table-bordered" *ngIf='myScrumteams && myScrumteams.length'>
+            <tr><th>Name</th><th>Department</th><th>Work Type</th><th>Methodology</th><th></th></tr>
+
+            <!--<tr *ngFor="let item of MyScrumteams | filter:filter;let i = index">-->
+            <tr *ngFor='let item of myScrumteams'>
+                <td>{{ item.teamName }}</td>
+                <td>{{ item.department }}</td>
+                <td>{{ item.workType }}</td>
+                <td>{{ item.methodology }}</td>
+                <td>
+                    <a [routerLink]="['/velocitykpi/', item.teamKey,item.teamName]">Velocity Progress</a>
+                </td>               
+            </tr>
+        </table>
+    </div>
+</div>

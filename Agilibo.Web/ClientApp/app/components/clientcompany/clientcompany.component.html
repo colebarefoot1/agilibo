@@ -1,0 +1,93 @@
+﻿
+                                    <div class="row">
+                                       
+                                        <form [formGroup]="CompanyForm" autocomplete="off" novalidate (ngSubmit)="submitclientCompany()">
+                                            <div class="col-md-12">
+                                                <alert></alert>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading"><h2 class="panel-title">Company Setup</h2></div>
+                                                    <div class="panel-body">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="companyName">Company Name<span class="text-danger">*</span></label>
+                                                                <input type="text" class="form-control" formControlName="companyName" [(ngModel)]="model.companyName" />
+                                                                <div style="font-size: 1.2em;color:red">
+                                                                    <em class="comapanyNameReq" *ngIf="validateControl('companyName') && checkError('companyName', 'required')">company Name is required</em>
+                                                                    <em class="MaxLength" *ngIf="validateControl('companyName') && checkError('companyName', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="address">Address</label>
+                                                                <input type="text" class="form-control" formControlName="address" [(ngModel)]="model.address" />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="zipCode">Zipcode</label>
+                                                                <input type="text" class="form-control" formControlName="zipCode" [(ngModel)]="model.zipCode" />
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="city">City</label>
+                                                                <input type="text" class="form-control" formControlName="city" [(ngModel)]="model.city" />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="countryKey">Country</label>
+                                                                <select formControlName="countryKey" class="form-control" [(ngModel)]="model.countryKey">
+                                                                    <option value="undefined">Please select Country</option>
+                                                                    <option id="{{item.countryName}}" *ngFor="let item of countryList"
+                                                                            [ngValue]="item.countryKey">
+                                                                        {{item.countryName}}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="vatNumber">VAT (Value Added Tax) Number </label><span class="small text-muted"> (optional)</span>
+                                                                <input type="text" class="form-control" formControlName="vatNumber" [(ngModel)]="model.vatNumber" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-footer">
+                                                        <button id="companySaveBtn" [disabled]="!CompanyForm.valid" class="btn btn-primary">Save</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <div class="col-md-12 panel-body">
+
+                                            <table class='table' *ngIf='detailCompany && detailCompany.length'>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Address</th>
+                                                        <th>Zipcode</th>
+                                                        <th>City</th>
+                                                        <th>Country</th>
+                                                        <th>Vat Number</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor='let Item of detailCompany'>
+                                                        <td>{{ Item.companyName }}</td>
+                                                        <td>{{ Item.address }}</td>
+                                                        <td>{{ Item.zipCode }}</td>
+                                                        <td>{{ Item.city }}</td>
+                                                        <td>{{ Item.countryName }}</td>
+                                                        <td>{{ Item.vatNumber }}</td>
+
+                                                        <td>
+                                                            <a name="editButton" [routerLink]="" (click)="edit(Item)">Edit</a> |
+                                                            <a name="deleteButton" [routerLink]="" (click)="delete(Item)">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="col-md-3">&nbsp;</div>
+
+                                    </div>

@@ -1,0 +1,46 @@
+﻿
+
+<div class="row manDiv">
+    <div class="col-md-10">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title ">
+                    Kudo Cards
+                    <div id="pdfButton" class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><button type="button" ng-click="savePdf()" class="btn btn-warning">Download pdf</button></div>
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <alert></alert>
+                <div class="form-group">
+                    <div class="kudoDIv" *ngFor="let kudo of kudoCardByUnit">
+                        <div class="kudobody">
+                            <div *ngIf="kudo.kudoImgPath">
+                                <img class="kudoboxImage" [src]="kudoCardImage(kudo?.kudoImgPath)">
+                            </div>
+                            <div class="head">
+                                <h4 class="kudoTitleColor" [style.background-color]="kudo.kudoTitleColor">{{kudo.kudoTitle}}</h4>
+                                    <p>From: {{kudo.fromEmailAddress}}</p>
+                                    <p>To: {{kudo.recipientEmailAddress}}</p>
+                                    <p style="font-size: 10px;">{{kudo.created | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
+                            </div>
+
+                            <div class="kudomsg">
+                                <p class="kudoText">
+                                    {{kudo.kudoMessage}}
+                                </p>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

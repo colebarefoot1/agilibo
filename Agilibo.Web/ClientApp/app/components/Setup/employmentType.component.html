@@ -1,0 +1,52 @@
+﻿
+      
+            <div class="row">
+                <alert></alert>
+                <div class="col-md-6">
+                    <form [formGroup]="employmentForm" autocomplete="off" novalidate (ngSubmit)="submitemploymentType()">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h2 class="panel-title">Employment Type Setup</h2></div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="employmentTypeName">Employment Type Setup</label>
+                                    <input type="text" id="employmentTypeName" class="form-control" formControlName="employmentTypeName" [(ngModel)]="model.employmentTypeName" />
+                                    <div style="font-size: 1.2em;color:red">
+                                        <em *ngIf="validateControl('employmentTypeName') && checkError('employmentTypeName', 'required')">Employment Type Name is required</em>
+                                        <em *ngIf="validateControl('employmentTypeName') && checkError('employmentTypeName', 'maxlength')">Maximum allowed length is 20 characters.</em>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="panel-footer">
+                                <button id="saveEmp" [disabled]="!employmentForm.valid" class="btn btn-primary">Save</button>
+
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <table class='table' *ngIf='employmentTypeList && employmentTypeList.length'>
+                        <thead>
+                            <tr>
+
+                                <th>Name</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let Item of employmentTypeList'>
+                                <td>{{ Item.employmentTypeName }}</td>
+
+                                <td>
+                                    <a [routerLink]="" (click)="edit(Item)">Edit</a> |
+                                    <a [routerLink]="" (click)="delete(Item)">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-3">&nbsp;</div>
+
+
+            </div>

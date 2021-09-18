@@ -1,0 +1,247 @@
+﻿body {
+}
+.ScrollStyle {
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+.ScrollStyle2 {
+    height:310px;
+    overflow-y: scroll;
+    
+}
+
+.create-status {
+    padding: 10px;
+    background-color: #fcfcfc;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+    .create-status form .form-group {
+        margin-bottom: 5px;
+    }
+
+    .create-status form .countdown {
+        color: #657786;
+        margin-right: 5px;
+        display: inline-block;
+        font-size: 13px;
+    }
+
+    .create-status form textarea {
+        border-radius: 15px;
+        padding: 10px 15px;
+        border-color: #f0f0f0;
+        resize: none;
+        margin: 0;
+        height:50px;
+    }
+
+        .create-status form textarea:focus {
+            border-color: #00baba;
+        }
+
+    .create-status form button {
+        border-radius: 15px;
+        background-color: #00baba;
+        border: none;
+        outline: none;
+        min-width: 80px;
+    }
+
+        .create-status form button:focus, .create-status form button:hover {
+            background-color: #00a1a1;
+        }
+
+            .create-status form button:focus[disabled], .create-status form button:hover[disabled] {
+                background-color: #00baba;
+            }
+
+.list-statuses {
+    background-color: #fff;
+}
+
+    .list-statuses ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        .list-statuses ul li {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+            .list-statuses ul li:last-child {
+                border: none;
+            }
+
+    .list-statuses .photo {
+        float: left;
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+
+        .list-statuses .photo img {
+            max-width: 100%;
+            border-radius: 100%;
+        }
+
+    .list-statuses .status {
+        overflow: hidden;
+        color: #474747;
+    }
+
+        .list-statuses .status p:last-child {
+            margin-bottom: 0;
+        }
+
+        .list-statuses .status ul {
+            list-style: none;
+            float: left;
+            padding-left: 5px;
+            margin-top: 10px;
+        }
+
+            .list-statuses .status ul li {
+                padding: 0;
+            }
+
+    .list-statuses .counts {
+        line-height: 40px;
+    }
+
+        .list-statuses .counts .reaction {
+            display: inline-block;
+            font-weight: 600;
+            color: #140044;
+            margin-left: 5px;
+        }
+
+            .list-statuses .counts .reaction[hidden] {
+                display: none;
+            }
+
+
+/*.subcontent {
+    margin-left: -16px;
+    margin-right: -16px;
+    width: calc(100% + 32px);
+    height: calc(100% - 50px);
+}*/
+
+/*Kudo card start*/
+.kudoImage {
+    float: right;
+    width: 180px;
+    height: 210px;
+    margin-top: 50px;
+}
+.kudoDIv{
+    height : 23em;
+    width:50em;
+    margin-left:180px;
+}
+.imgdiv {
+    height: 300px;
+    width: 475px;
+    border: 1px solid;
+}
+.kudoTitleColor {
+    padding: 5px;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+}
+.head{
+    padding:8px;
+}
+.kudomsg {
+    margin-top: 10px;
+    padding-left: 35px;
+}
+.kudoText {
+    text-decoration: underline;
+    font-size: 12px;
+    overflow: hidden;
+    line-height: 1;
+    white-space:initial;
+}
+
+/*.kudofooter {
+    margin-top: 10px;
+    padding-left: 35px;
+}*/
+/*-------end------*/
+
+/*happiness*/ 
+.imgmain {
+    width: 85px;
+    height: auto;
+    margin: 1em;
+}
+
+div.imgShow-info {
+    float: right;
+    color: #000;
+    position:relative;
+    margin: 2em;
+    background: #cfc;
+    width: 300px;
+    height: 150px;
+    min-height:120px;
+    font-family: Rockwell;
+    -moz-box-shadow: 5px 5px 7px rgba(33,33,33,1);
+    -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    -moz-transition: -moz-transform .15s linear;
+    -o-transition: -o-transform .15s linear;
+    -webkit-transition: -webkit-transform .15s linear;
+    -o-transform: rotate(4deg);
+    -webkit-transform: rotate(4deg);
+    -moz-transform: rotate(4deg);
+}
+.happyDIv {
+    height: 19em;
+    width: 50em;
+    margin-left: 180px;
+}
+.happyimgdiv {
+    height: 240px;
+    width: 480px;
+    border: 1px solid;
+}
+/*------ end ---*/
+
+/*for text message start */ 
+.msgDiv {
+    align-items: center;
+    background-color: #f1f1f1;
+    border-bottom-left-radius: 0.325rem;
+    border-bottom-right-radius: 0.325rem;
+    padding: 1.75rem 2rem;
+    color: #222222;
+    cursor: default;
+    font-size: 18px;
+    width: 475px;
+    margin-left: 180px;
+    font-family: 'MV Boli';
+    -moz-box-shadow: 5px 5px 7px rgba(33,33,33,1);
+    -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+}
+.postDate {
+    margin-left: 8px;
+    font-size: 14px;
+}
+.hevent {
+    padding-left: 15px;
+}
+.msg-name{
+    font-size:18px;
+}
+.msg-date {
+    font-size: 12px;
+}
+
+ 

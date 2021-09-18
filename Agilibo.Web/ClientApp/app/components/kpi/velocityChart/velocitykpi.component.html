@@ -1,0 +1,36 @@
+﻿<div class="col-md-12">
+    <alert></alert>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2 class="panel-title">Scrum Delivery KPI : {{teamname}}</h2></div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-condensed table-bordered" *ngIf='mysprintlist && mysprintlist.length'>
+                    <tr>
+                        <th></th>
+                        <th>Sprint<br />Story Points<br />Committed</th>
+                        <th>Sprint<br />Story Points<br />Completed</th>
+                        <th>Sprint<br />commitment<br />Changes</th>
+                        <th>Running<br />Velocity<br />for 5 closed sprints</th>
+                        <th>Over Deliver</th>
+                    </tr>
+
+                    <tr *ngFor='let item of mysprintlist'>
+                        <td>{{ item.sprintName }} : {{ item.dateSpan }}</td>
+                        <td>{{ item.committed }}</td>
+                        <td>{{ item.completed }}</td>
+                        <td>{{ item.committementChangeValue }}</td>
+                        <td>{{ item.runningVelocityForFiveSprintValue }}</td>
+                        <td>{{item.overDeliveryValue}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <a [routerLink]="['/viewteam']" class="btn btn-warning">Back</a>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="chart">
+    <canvas id="canvas">{{chart}}</canvas>
+</div>
